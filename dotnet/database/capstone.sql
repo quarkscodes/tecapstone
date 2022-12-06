@@ -27,9 +27,33 @@ CREATE TABLE users (
 --populate default data
 
 -- Robert/password
-INSERT INTO users (username, password_hash, salt, user_role) VALUES ('Robert','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
+INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 
 --Nancy/password
-INSERT INTO users (username, password_hash, salt, user_role) VALUES ('Nancy','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+
+GO
+
+CREATE TABLE events (
+	event_id int IDENTITY(1000,1) NOT NULL,
+	name varchar(200) NOT NULL,
+	description varchar(4000),
+	img_url varchar(max),
+	start_time DATETIME NOT NULL,
+	end_time DATETIME NOT NULL,
+	--tag placeholder, make conjoined table
+	tag varchar(50) NOT NULL,
+	--add property for user who created event
+	CONSTRAINT PK_event PRIMARY KEY (event_id)
+)
+
+INSERT INTO events (name, description, img_url, start_time, end_time, tag)
+VALUES ('snackums', 'get your free snackums', 'https://images.freshop.com/00038000417405/0c14512451238be71bb6a5f7ef26304c_large.png', '2022-12-30 07:00:00', '2023-01-07 17:00:00', 'food');
+
+INSERT INTO events (name, description, img_url, start_time, end_time, tag)
+VALUES ('pants', 'why you no pants', 'https://www.helikon-tex.com/media/catalog/product/cache/6/image/9df78eab33525d08d6e5fb8d27136e95/s/p/sp-pgm-dc-11.jpg', '2022-12-30 07:00:00', '2023-01-07 19:00:00', 'pants');
+
+INSERT INTO events (name, description, img_url, start_time, end_time, tag)
+VALUES ('poplock danceoff', 'pop and lock all the way to the moon', 'https://i.ytimg.com/vi/Cg6u8WbOOdA/hqdefault.jpg', '2022-12-26 19:00:00', '2022-12-26 22:00:00', 'soul');
 
 GO

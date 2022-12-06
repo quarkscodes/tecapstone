@@ -1,12 +1,17 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-     <p>If you are seeing this, you are authenticated.</p>
+    <event-list />
   </div>
 </template>
 
 <script>
+import EventList from "../components/Events"
+
 export default {
-  name: "home"
+  name: "home",
+  components: {
+    EventList
+  }
 };
 </script>
