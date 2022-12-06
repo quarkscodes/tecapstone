@@ -1,0 +1,5 @@
+White: EFE6DD
+Yellow: F3DFA2
+Blue: 7EBDC2
+Red: BB4430
+Black: 231F20
