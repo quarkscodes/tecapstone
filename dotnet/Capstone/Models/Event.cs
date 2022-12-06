@@ -14,5 +14,7 @@ namespace Capstone.Models
         public string StartTime { get; set; }
         public string EndTime { get; set; }
         public string Tag { get; set; }
+        public string Location { get; set; }
+
     }
 }

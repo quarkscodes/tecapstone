@@ -39,6 +39,7 @@ export default {
 <style>
 #event_title {
   grid-area: title;
+  background-color: #EFE6DD
 }
 #event_description {
   grid-area: description;
@@ -60,13 +61,13 @@ export default {
 
 .event_card {
   border: 2px solid black;
+  margin: 21px;
+  background-color: #7EBDC2;
   display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
   grid-template-areas:
     'img title start'
     'img title end'
     'img tag tag'
-}
-.event{
-    
 }
 </style>

@@ -11,7 +11,7 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private readonly string sqlGetEvents =
-            "SELECT event_id, name, description, img_url, start_time, end_time, tag FROM events";
+            "SELECT event_id, name, description, img_url, start_time, end_time, tag, location FROM events";
 
         public EventsSqlDao(string dbConnectionString)
         {
@@ -55,7 +55,9 @@ namespace Capstone.DAO
                 ImgUrl = Convert.ToString(reader["img_url"]),
                 StartTime = Convert.ToString(reader["start_time"]),
                 EndTime = Convert.ToString(reader["end_time"]),
-                Tag = Convert.ToString(reader["tag"])
+                Tag = Convert.ToString(reader["tag"]),
+                Location = Convert.ToString(reader["location"])
+
             };
 
             return e;

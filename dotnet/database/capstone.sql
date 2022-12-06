@@ -43,17 +43,20 @@ CREATE TABLE events (
 	end_time DATETIME NOT NULL,
 	--tag placeholder, make conjoined table
 	tag varchar(50) NOT NULL,
+	location varchar(1000) NOT NULL,
 	--add property for user who created event
 	CONSTRAINT PK_event PRIMARY KEY (event_id)
 )
 
-INSERT INTO events (name, description, img_url, start_time, end_time, tag)
-VALUES ('snackums', 'get your free snackums', 'https://images.freshop.com/00038000417405/0c14512451238be71bb6a5f7ef26304c_large.png', '2022-12-30 07:00:00', '2023-01-07 17:00:00', 'food');
+INSERT INTO events (name, description, img_url, start_time, end_time, tag, location)
+VALUES ('snackums', 'get your free snackums', 'https://images.freshop.com/00038000417405/0c14512451238be71bb6a5f7ef26304c_large.png', '2022-12-30 07:00:00', '2023-01-07 17:00:00', 'food', 'Slade Cottage Bridstow ROSS-ON-WYE, HR9 6AJ United Kingdom
 
-INSERT INTO events (name, description, img_url, start_time, end_time, tag)
-VALUES ('pants', 'why you no pants', 'https://www.helikon-tex.com/media/catalog/product/cache/6/image/9df78eab33525d08d6e5fb8d27136e95/s/p/sp-pgm-dc-11.jpg', '2022-12-30 07:00:00', '2023-01-07 19:00:00', 'pants');
+');
 
-INSERT INTO events (name, description, img_url, start_time, end_time, tag)
-VALUES ('poplock danceoff', 'pop and lock all the way to the moon', 'https://i.ytimg.com/vi/Cg6u8WbOOdA/hqdefault.jpg', '2022-12-26 19:00:00', '2022-12-26 22:00:00', 'soul');
+INSERT INTO events (name, description, img_url, start_time, end_time, tag, location)
+VALUES ('pants', 'why you no pants', 'https://www.helikon-tex.com/media/catalog/product/cache/6/image/9df78eab33525d08d6e5fb8d27136e95/s/p/sp-pgm-dc-11.jpg', '2022-12-30 07:00:00', '2023-01-07 19:00:00', 'pants', 'My house or smthn');
+
+INSERT INTO events (name, description, img_url, start_time, end_time, tag, location)
+VALUES ('poplock danceoff', 'pop and lock all the way to the moon', 'https://i.ytimg.com/vi/Cg6u8WbOOdA/hqdefault.jpg', '2022-12-26 19:00:00', '2022-12-26 22:00:00', 'soul', '1337 ITSLITFAM, Columbus, OH 8675309');
 
 GO
