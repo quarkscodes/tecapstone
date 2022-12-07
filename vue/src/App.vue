@@ -8,3 +8,19 @@
     <router-view />
   </div>
 </template>
+
+<script>
+import eventsService from "@/services/EventsService.js";
+export default {
+ created() {
+    eventsService
+      .getEvents()
+      .then((response) => {
+        this.$store.commit("SET_EVENTS", response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.status);
+      });
+  }, 
+}
+</script>
