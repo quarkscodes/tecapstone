@@ -36,4 +36,53 @@ export default {
 </script>
 
 <style>
+/*.event_card {
+  display: grid;
+  grid-template-columns: 3fr 7fr 4fr;
+  grid-template-areas:
+    "img title dates"
+    "img tag tag";
+  background-color: #7ebdc2;
+  margin: 16px;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.event{
+  font-family: Verdana, Helvetica, sans-serif;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+
+#event_title {
+  grid-area: title;
+  background-color: #efe6dd;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+#event_image {
+  grid-area: img;
+  width: 95%;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+}
+
+#event_dates {
+  grid-area: dates;
+  background-color: #efe6dd;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+#event_tag {
+  grid-area: tag;
+  background-color: #efe6dd;
+  padding: 4px;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-left: 24px;
+  margin-right: 24px;
+}*/
 </style>
