@@ -32,11 +32,6 @@ export default {
   components: {
     //Details,
   },
-  data() {
-    return{
-        events: this.eventList()
-    }
-  },
   computed: {
       eventList() {
       return this.$state.store.events;

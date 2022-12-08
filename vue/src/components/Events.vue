@@ -3,7 +3,7 @@
     <router-link
       v-bind:to="{ name: 'details', params: { id: event.eventId } }"
       class="event_card"
-      v-for="event in EventList"
+      v-for="event in filteredEvents"
       :key="event.eventId"
     >
       <div>
@@ -22,7 +22,7 @@
 <script>
 export default {
   name: "Events",
-  props: ['zipcode'],
+  props: ['filteredEvents'], //this is the new list to show
   methods: {
     DateOnly(date) {
       let text = date.split(" ");
