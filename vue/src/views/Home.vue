@@ -5,50 +5,53 @@
       <p id="filter_header">Filter</p>
       <form>
         <label for="zipcode" id="filter_zip">Zip Code: </label>
-        <input type="text" id="filter_zip" name="filter_zip" maxlength="5">&nbsp;
-        <input type="submit" value="Submit">
+        <input
+          v-model="inputZip"
+          type="text"
+          id="filter_zip"
+          name="filter_zip"
+        />&nbsp;
+        <input
+          v-on:click.prevent="zipFilter(inputZip)"
+          type="submit"
+          value="Submit"
+        />
       </form>
     </div>
-    <event-list class="home" id="home_events" />
+    <events class="home" id="home_events" v-bind:zipcode="inputZip" />
   </div>
 </template>
 
 <script>
-import EventList from "../components/Events"
+import Events from "../components/Events";
 
 export default {
   name: "home",
   components: {
-    EventList
+    Events,
   },
-    data(){
-      let zipcode = true,
-  },
-      methods:{
-    zipFilter(zip){
-      this.$state.store.event.forEach(event => {
-        if (event.zip!=zip)
-        zipcode = false
-      });
-    }
+  data() {
+    return {
+      inputZip: null,
+    };
   },
 };
 </script>
 
 <style>
-.home_page{
+.home_page {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-areas: 
+  grid-template-areas:
     "header header"
     "filter events";
 }
 
-#home_header{
+#home_header {
   grid-area: header;
 }
 
-#home_filter{
+#home_filter {
   grid-area: filter;
   background-color: #7ebdc2;
   margin: 8px;
@@ -56,18 +59,18 @@ export default {
   border-radius: 12px;
 }
 
-#filter_header{
+#filter_header {
   font-size: x-large;
   font-weight: bold;
 }
 
-#filter_zip{
+#filter_zip {
   font-size: large;
   font-weight: bold;
   width: 45%;
 }
 
-#home_events{
+#home_events {
   grid-area: events;
 }
 </style>

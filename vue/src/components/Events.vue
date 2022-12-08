@@ -5,15 +5,16 @@
       class="event_card"
       v-for="event in EventList"
       :key="event.eventId"
-      v-show="zipcode"
     >
-      <p class="event" id="event_title">{{ event.name }}</p>
-      <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
-      <p class="event" id="event_dates">
-        <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
-        <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
-      </p>
-      <p class="event" id="event_tag">{{ event.tag }}</p>
+      <div>
+        <p class="event" id="event_title">{{ event.name }}</p>
+        <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
+        <p class="event" id="event_dates">
+          <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
+          <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
+        </p>
+        <p class="event" id="event_tag">{{ event.tag }}</p>
+      </div>
     </router-link>
   </div>
 </template>
@@ -21,7 +22,7 @@
 <script>
 export default {
   name: "Events",
-
+  props: ['zipcode'],
   methods: {
     DateOnly(date) {
       let text = date.split(" ");

@@ -21,12 +21,27 @@
       </p>
     </div>
     <router-view />
+    <!--<div is='Details' v-bind:eventList="events" v:if='false' />-->
   </div>
 </template>
 
 <script>
 import eventsService from "@/services/EventsService.js";
+//import Details from "./views/Details.vue"
 export default {
+  components: {
+    //Details,
+  },
+  data() {
+    return{
+        events: this.eventList()
+    }
+  },
+  computed: {
+      eventList() {
+      return this.$state.store.events;
+    },
+  },
   created() {
     eventsService
       .getEvents()
@@ -58,6 +73,4 @@ a {
   height: 20px;
   width: 20px;
 }
-
-
 </style>

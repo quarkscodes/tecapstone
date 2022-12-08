@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  props: [],
+  props: ['eventList'],
   data() {
     return { event: {} };
   },
