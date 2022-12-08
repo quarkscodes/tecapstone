@@ -19,8 +19,19 @@ import EventList from "../components/Events"
 export default {
   name: "home",
   components: {
-    EventList,
-  }
+    EventList
+  },
+    data(){
+      let zipcode = true,
+  },
+      methods:{
+    zipFilter(zip){
+      this.$state.store.event.forEach(event => {
+        if (event.zip!=zip)
+        zipcode = false
+      });
+    }
+  },
 };
 </script>
 
