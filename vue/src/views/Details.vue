@@ -6,7 +6,7 @@
     <p class="details" id="details_end"><b>End Date:</b> {{ event.endTime }}</p>
     <p class="details" id="details_duration"><b>Duration:</b> duration goes here</p>
     <p class="details" id="details_tag">{{ event.tag }}</p>
-    <p class="details" id="details_location"><b>Location:</b> {{ event.location }}</p>
+    <p class="details" id="details_location"><b>Location:</b> {{ event.address }}, {{ event.city }}, {{event.state}}, {{event.zip}}</p>
     <p class="details" id="details_description">{{ event.description }}</p>
   </div>
 </template>

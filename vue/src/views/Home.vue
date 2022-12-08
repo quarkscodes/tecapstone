@@ -3,9 +3,9 @@
     <p class="home" id="home_header">Tap on an event to see more details</p>
     <div class="home" id="home_filter">
       <p id="filter_header">Filter</p>
-      <form>
-        <label for="zipcode" id="filter_zip">Zip Code: </label>
-        <input type="text" id="filter_zip" name="filter_zip" maxlength="5">&nbsp;
+      <form v-on:submit.prevent="onSubmit">
+        <label for="filter_zip" id="filter_zip">Zip Code: </label>
+        <input name="filter_zip" type="text" id="filter_zip" maxlength="">&nbsp;
         <input type="submit" value="Submit">
       </form>
     </div>
@@ -22,13 +22,16 @@ export default {
     EventList
   },
     data(){
-      let zipcode = true,
+      return {
+        zipcode: true
+      }
   },
       methods:{
     zipFilter(zip){
       this.$state.store.event.forEach(event => {
-        if (event.zip!=zip)
-        zipcode = false
+        if (event.zip==zip){
+        this.zipcode = false
+        }
       });
     }
   },
