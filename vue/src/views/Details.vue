@@ -25,7 +25,7 @@ export default {
   created() {
     let id = this.$route.params.id;
     let events = this.$store.state.events;
-    console.log("Reached Created in Details.vue");
+    console.log(id);
     console.log(events);
     this.event = events.find((item) => {
       return item.eventId == id;
