@@ -41,6 +41,7 @@ export default {
     "location img"
     "desc desc";
   background-color: #efe6dd;
+  border: 4px solid #7EBDC2;
   margin: 16px;
   padding: 24px;
   border-radius: 12px;
@@ -55,6 +56,7 @@ export default {
 
 #details_image{
   grid-area: img;
+  border: 4px solid #7EBDC2;
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 12px;
