@@ -38,6 +38,7 @@ export default {
 .event_card {
   display: grid;
   grid-template-columns: 3fr 7fr 4fr;
+  grid-column-gap: 16px;
   grid-template-areas:
     "img title dates"
     "img tag tag";
@@ -80,12 +81,12 @@ export default {
 #event_tag {
   grid-area: tag;
   font-size: large;
+  text-align: left;
   background-color: #efe6dd;
   padding: 4px;
   padding-left: 8px;
   padding-right: 8px;
   border-radius: 6px;
-  margin-left: 24px;
-  margin-right: 24px;
+  margin-left: 0px;
 }
 </style>
