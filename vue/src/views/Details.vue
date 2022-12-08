@@ -2,31 +2,55 @@
   <div class="event_details" v-if="event">
     <p class="details" id="details_title">{{ event.name }}</p>
     <img class="details" id="details_image" :src="event.imgUrl" alt="idk fam" />
-    <p class="details" id="details_start"><b>Start Date:</b> {{ event.startTime }}</p>
+    <p class="details" id="details_start">
+      <b>Start Date:</b> {{ event.startTime }}
+    </p>
     <p class="details" id="details_end"><b>End Date:</b> {{ event.endTime }}</p>
-    <p class="details" id="details_duration"><b>Duration:</b> duration goes here</p>
+    <p class="details" id="details_duration">
+      <b>Duration:</b> duration goes here
+    </p>
     <p class="details" id="details_tag">{{ event.tag }}</p>
-    <p class="details" id="details_location"><b>Location:</b> {{ event.address }}, {{ event.city }}, {{event.state}}, {{event.zip}}</p>
+    <p class="details" id="details_location">
+      <b>Location:</b> {{ event.address }}, {{ event.city }}, {{ event.state }},
+      {{ event.zip }}
+    </p>
     <p class="details" id="details_description">{{ event.description }}</p>
   </div>
 </template>
 
 <script>
+import eventsService from "@/services/EventsService.js";
+
 export default {
-  props: ['eventList'],
+  props: ["eventList"],
   data() {
     return { event: {} };
   },
   created() {
-    let id = this.$route.params.id;
-    let events = this.$store.state.events;
-    console.log(id);
-    console.log(events);
-    this.event = events.find((item) => {
-      return item.eventId == id;
-    });
+    eventsService
+      .getEvents()
+      .then((response) => {
+        this.$store.commit("SET_EVENTS", response.data);
+        this.event = response.data.find((item) => {
+          return item.eventId == this.$route.params.id;
+        });
+      })
+      .catch((error) => {
+        console.log(error.response.data.status);
+      });
   },
 };
+// computed: {
+//   findEventById() {
+//     let id = this.$route.params.id;
+//     let events = this.$store.state.events;
+//     console.log(id);
+//     console.log(events);
+//     return events.find((item) => {
+//       return item.eventId == id;
+//     });
+//   },
+// },
 </script>
 
 <style>
@@ -43,50 +67,50 @@ export default {
     "location img"
     "desc desc";
   background-color: #efe6dd;
-  border: 4px solid #7EBDC2;
+  border: 4px solid #7ebdc2;
   margin: 16px;
   padding: 24px;
   border-radius: 12px;
 }
 
-#details_title{
+#details_title {
   grid-area: title;
   text-align: center;
   font-size: xx-large;
   font-weight: bold;
 }
 
-#details_image{
+#details_image {
   grid-area: img;
-  border: 4px solid #7EBDC2;
+  border: 4px solid #7ebdc2;
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 12px;
 }
 
-#details_start{
+#details_start {
   grid-area: start;
   text-align: left;
   font-size: large;
 }
 
-#details_end{
+#details_end {
   grid-area: end;
   text-align: left;
   font-size: large;
 }
 
-#details_duration{
+#details_duration {
   grid-area: duration;
   text-align: left;
   font-size: large;
 }
 
-#details_tag{
+#details_tag {
   grid-area: tag;
   font-size: large;
   text-align: center;
-  border: 4px solid #7EBDC2;
+  border: 4px solid #7ebdc2;
   margin: auto;
   padding: 4px;
   padding-left: 10px;
@@ -94,13 +118,13 @@ export default {
   border-radius: 6px;
 }
 
-#details_location{
+#details_location {
   grid-area: location;
   text-align: left;
   font-size: large;
 }
 
-#details_description{
+#details_description {
   grid-area: desc;
   display: flex;
   align-content: left;
