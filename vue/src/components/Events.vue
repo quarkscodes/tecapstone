@@ -1,11 +1,18 @@
 <template>
   <div>
-    <router-link v-bind:to="{name: 'details', params: {id: event.eventId}}" class="event_card" v-for="event in EventList" :key="event.eventId">
-      <h2 class="event" id="event_title">{{ event.name }}</h2>
+    <router-link
+      v-bind:to="{ name: 'details', params: { id: event.eventId } }"
+      class="event_card"
+      v-for="event in EventList"
+      :key="event.eventId"
+    >
+      <p class="event" id="event_title">{{ event.name }}</p>
       <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
-      <p class="event" id="event_start">Start Date: {{ event.startTime }}</p>
-      <p class="event" id="event_end">End Date: {{ event.endTime }}</p>
-      <p class="event" id="event_tag">Tags: {{ event.tag }}</p>
+      <p class="event" id="event_dates">
+        <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
+        <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
+      </p>
+      <p class="event" id="event_tag">{{ event.tag }}</p>
     </router-link>
   </div>
 </template>
@@ -13,7 +20,13 @@
 <script>
 export default {
   name: "Events",
-    computed: {
+  methods: {
+    DateOnly(date) {
+      let text = date.split(" ");
+      return text[0];
+    },
+  },
+  computed: {
     EventList() {
       return this.$store.state.events;
     },
@@ -22,37 +35,58 @@ export default {
 </script>
 
 <style>
-#event_title {
-  grid-area: title;
-  background-color: #EFE6DD
-}
-#event_description {
-  grid-area: description;
-}
-#event_image {
-  height: 100px;
-  width: 100px;
-  grid-area: img;
-}
-#event_start {
-  grid-area: start;
-}
-#event_end {
-  grid-area: end;
-}
-#event_tag {
-  grid-area: tag;
+.event_card {
+  display: grid;
+  grid-template-columns: 3fr 7fr 4fr;
+  grid-column-gap: 16px;
+  grid-template-areas:
+    "img title dates"
+    "img tag tag";
+  background-color: #7ebdc2;
+  margin: 16px;
+  padding: 8px;
+  border-radius: 12px;
 }
 
-.event_card {
-  border: 2px solid black;
-  margin: 21px;
-  background-color: #7EBDC2;
-  display: grid;
-  grid-template-columns: 1fr 3fr 2fr;
-  grid-template-areas:
-    'img title start'
-    'img title end'
-    'img tag tag'
+.event{
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+
+#event_title {
+  grid-area: title;
+  font-size: x-large;
+  font-weight: bold;
+  background-color: #efe6dd;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+#event_image {
+  grid-area: img;
+  width: 95%;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+}
+
+#event_dates {
+  grid-area: dates;
+  font-size: large;
+  background-color: #efe6dd;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+#event_tag {
+  grid-area: tag;
+  font-size: large;
+  text-align: left;
+  background-color: #efe6dd;
+  padding: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 6px;
+  margin-left: 0px;
 }
 </style>

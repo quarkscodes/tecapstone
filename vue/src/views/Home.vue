@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <p>Tap on an event to see more details</p>
     <event-list />
   </div>
 </template>

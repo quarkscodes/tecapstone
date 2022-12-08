@@ -1,39 +1,108 @@
 <template>
-  <div>
-    <router-link v-bind:to="{ name: 'home' }">
-      <div>
-        <h2 class="event" id="event_title">{{ event.name }}</h2>
-        <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
-        <p class="event" id="event_start">Start Date: {{ event.startTime }}</p>
-        <p class="event" id="event_end">End Date: {{ event.endTime }}</p>
-        <p class="event" id="event_tag">Tags: {{ event.tag }}</p>
-        <p class="content" id="event_location">
-          Location: {{ event.location }}
-        </p>
-        <p class="content" id="event_description">{{ event.description }}</p>
-      </div>
-    </router-link>
+  <div class="event_details">
+    <p class="details" id="details_title">{{ event.name }}</p>
+    <img class="details" id="details_image" :src="event.imgUrl" alt="idk fam" />
+    <p class="details" id="details_start"><b>Start Date:</b> {{ event.startTime }}</p>
+    <p class="details" id="details_end"><b>End Date:</b> {{ event.endTime }}</p>
+    <p class="details" id="details_duration"><b>Duration:</b> duration goes here</p>
+    <p class="details" id="details_tag">{{ event.tag }}</p>
+    <p class="details" id="details_location"><b>Location:</b> {{ event.location }}</p>
+    <p class="details" id="details_description">{{ event.description }}</p>
   </div>
 </template>
 
 <script>
 export default {
-    props:[],
+  props: [],
   data() {
     return { event: {} };
   },
   created() {
-      let id = this.$route.params.id;
+    let id = this.$route.params.id;
     let events = this.$store.state.events;
-    console.log("Reached Created in Details.vue");
-    console.log(events);
     this.event = events.find((item) => {
       return item.eventId == id;
     });
-    console.log(this.event)
   },
 };
 </script>
 
 <style>
+.event_details {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-column-gap: 8px;
+  grid-template-areas:
+    "title img"
+    "tag img"
+    "start img"
+    "end img"
+    "duration img"
+    "location img"
+    "desc desc";
+  background-color: #efe6dd;
+  border: 4px solid #7EBDC2;
+  margin: 16px;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+#details_title{
+  grid-area: title;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+#details_image{
+  grid-area: img;
+  border: 4px solid #7EBDC2;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+}
+
+#details_start{
+  grid-area: start;
+  text-align: left;
+  font-size: large;
+}
+
+#details_end{
+  grid-area: end;
+  text-align: left;
+  font-size: large;
+}
+
+#details_duration{
+  grid-area: duration;
+  text-align: left;
+  font-size: large;
+}
+
+#details_tag{
+  grid-area: tag;
+  font-size: large;
+  text-align: center;
+  border: 4px solid #7EBDC2;
+  margin: auto;
+  padding: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 6px;
+}
+
+#details_location{
+  grid-area: location;
+  text-align: left;
+  font-size: large;
+}
+
+#details_description{
+  grid-area: desc;
+  display: flex;
+  align-content: left;
+  text-align: left;
+  font-size: large;
+}
 </style>
