@@ -22,7 +22,6 @@
 import eventsService from "@/services/EventsService.js";
 
 export default {
-  props: ["eventList"],
   data() {
     return { event: {} };
   },
@@ -40,17 +39,6 @@ export default {
       });
   },
 };
-// computed: {
-//   findEventById() {
-//     let id = this.$route.params.id;
-//     let events = this.$store.state.events;
-//     console.log(id);
-//     console.log(events);
-//     return events.find((item) => {
-//       return item.eventId == id;
-//     });
-//   },
-// },
 </script>
 
 <style>
