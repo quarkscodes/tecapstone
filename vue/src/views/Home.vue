@@ -3,7 +3,7 @@
     <p class="home" id="home_header">Tap on an event to see more details</p>
     <div class="home" id="home_filter">
       <p id="filter_header">Filter</p>
-      <form>
+  <!--    <form>
         <label for="zipcode" id="filter_zip">Zip Code: </label>
         <input
           v-model="inputZip"
@@ -15,7 +15,11 @@
           v-on:click.prevent="zipFilter(inputZip)"
           type="submit"
           value="Submit"
-        />
+        />-->
+      <form v-on:submit.prevent="onSubmit">
+        <label for="filter_zip" id="filter_zip">Zip Code: </label>
+        <input name="filter_zip" type="text" id="filter_zip" maxlength="">&nbsp;
+        <input type="submit" value="Submit">
       </form>
     </div>
     <events class="home" id="home_events" v-bind:zipcode="inputZip" />
@@ -34,8 +38,21 @@ export default {
     return {
       inputZip: null,
     };
-  },
-};
+    //data(){
+      //return {
+        //zipcode: true
+      //}
+  //},
+      //methods:{
+    //zipFilter(zip){
+      //this.$state.store.event.forEach(event => {
+        //if (event.zip==zip){
+        //this.zipcode = false
+        //}
+      //});
+    //}
+  //},
+//};
 </script>
 
 <style>
