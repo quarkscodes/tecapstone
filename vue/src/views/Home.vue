@@ -12,8 +12,23 @@
           v-model="inputZip"
         />&nbsp;
       </form>
+      <div id="buttons">
+        <button v-on:mouseup="removeText()" id="bc">	&lt;==Backspace</button>
+        <button v-on:mouseup="inputText(1)" id="b1">1</button>
+        <button v-on:mouseup="inputText(2)" id="b2">2</button>
+        <button v-on:mouseup="inputText(3)" id="b3">3</button>
+        <button v-on:mouseup="inputText(4)" id="b4">4</button>
+        <button v-on:mouseup="inputText(5)" id="b5">5</button>
+        <button v-on:mouseup="inputText(6)" id="b6">6</button>
+        <button v-on:mouseup="inputText(7)" id="b7">7</button>
+        <button v-on:mouseup="inputText(8)" id="b8">8</button>
+        <button v-on:mouseup="inputText(9)" id="b9">9</button>
+        <button v-on:mouseup="inputText(0)" id="b0">0</button>
+      </div>
     </div>
-    <events class="home" id="home_events" v-bind:filteredEvents="filteredEvents" />
+    <events
+      class="home" id="home_events" v-bind:filteredEvents="filteredEvents.sort(dateSort)"
+    />
   </div>
 </template>
 
@@ -28,14 +43,46 @@ export default {
   data() {
     return {
       inputZip: null,
-    }
+    };
   },
   computed: {
     filteredEvents() {
-      return this.$store.state.events.filter(e => { return e.zip.toString().includes(this.inputZip) || !this.inputZip });
-    }
-  }
-}
+      return this.$store.state.events.filter((e) => {
+        return e.zip.toString().includes(this.inputZip) || !this.inputZip;
+      });
+    },
+  },
+  methods: {
+    inputText(num) {
+      if(this.inputZip>0){
+      let zipString = this.inputZip.toString();
+      console.log(zipString);
+      let numString = num.toString();
+      console.log(numString);
+      let newString = zipString + numString;
+      let newNum = parseInt(newString);
+      this.inputZip = newNum;
+      }
+      else{
+        this.inputZip=num
+      }
+    },
+
+      dateSort(){
+        //edit this code to filter your list by date
+// array.sort(function(a,b){
+//   // Turn your strings into dates, and then subtract them
+//   // to get a value that is either negative, positive, or zero.
+//   return new Date(b.date) - new Date(a.date);
+// });
+      },
+      removeText(){
+              if(this.inputZip>0){
+                this.inputZip=Math.floor(this.inputZip / 10)
+              }
+      }
+    },
+};
 </script>
 
 <style>
@@ -68,6 +115,56 @@ export default {
   font-size: large;
   font-weight: bold;
   width: 45%;
+}
+
+#buttons {
+  border: 3px solid black;
+  display: grid;
+  margin-top: 20px;
+  width: auto;
+  height: 350px;
+  grid-template-areas:
+    "b0 bc bc"
+    "b1 b2 b3"
+    "b4 b5 b6"
+    "b7 b8 b9";
+}
+
+#bc {
+  grid-area: bc;
+}
+#b0 {
+  grid-area: b0;
+}
+#b1 {
+  grid-area: b1;
+}
+#b2 {
+  grid-area: b2;
+}
+#b3 {
+  grid-area: b3;
+}
+#b4 {
+  grid-area: b4;
+}
+#b5 {
+  grid-area: b5;
+}
+#b6 {
+  grid-area: b6;
+}
+#b7 {
+  grid-area: b7;
+}
+#b8 {
+  grid-area: b8;
+}
+#b9 {
+  grid-area: b9;
+}
+#b0 {
+  grid-area: b0;
 }
 
 #home_events {
