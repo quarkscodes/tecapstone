@@ -59,4 +59,13 @@ VALUES ('pants', 'why you no pants', 'https://www.helikon-tex.com/media/catalog/
 INSERT INTO events (name, description, img_url, start_time, end_time, tag, location)
 VALUES ('poplock danceoff', 'pop and lock all the way to the moon', 'https://i.ytimg.com/vi/Cg6u8WbOOdA/hqdefault.jpg', '2022-12-26 19:00:00', '2022-12-26 22:00:00', 'soul', '1337 ITSLITFAM, Columbus, OH 8675309');
 
+INSERT INTO events (name, description, img_url, start_time, end_time, tag, location)
+VALUES ('USA Fit Pflugerville Resolution Race',
+	'Stay on track on your new year’s resolutions and help us fight hunger by registering for the USA Fit Resolution Half & Austin Subaru 5K race benefiting the Food Bank. The race kicks off on January 8, 2023 at Lake Pflugerville this new year. The race will feature New Year’s themed festivities at the start and at the finish line. Register today to help families in need start the year off right with healthy meals.',
+	'https://s3.amazonaws.com/runguides2/events/flyers/000/007/960/original/data?1637718078',
+	'2023-01-08 07:30:00',
+	'2023-01-08 23:59:59',
+	'food, fitness',
+	'18216 Weiss Lane, Pflugerville, TX, 78660');
+
 GO
