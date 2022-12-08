@@ -5,6 +5,7 @@
       class="event_card"
       v-for="event in EventList"
       :key="event.eventId"
+      v-show="zipcode"
     >
       <p class="event" id="event_title">{{ event.name }}</p>
       <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
@@ -20,6 +21,7 @@
 <script>
 export default {
   name: "Events",
+
   methods: {
     DateOnly(date) {
       let text = date.split(" ");
@@ -48,7 +50,7 @@ export default {
   border-radius: 12px;
 }
 
-.event{
+.event {
   width: fit-content;
   height: fit-content;
   margin: auto;

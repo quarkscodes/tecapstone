@@ -12,6 +12,17 @@ export default {
   name: "home",
   components: {
     EventList
-  }
+  },
+    data(){
+      let zipcode = true,
+  },
+      methods:{
+    zipFilter(zip){
+      this.$state.store.event.forEach(event => {
+        if (event.zip!=zip)
+        zipcode = false
+      });
+    }
+  },
 };
 </script>
