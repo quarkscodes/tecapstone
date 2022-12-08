@@ -11,7 +11,7 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private readonly string sqlGetEvents =
-            "SELECT event_id, name, description, img_url, start_time, end_time, tag, location FROM events";
+            "SELECT event_id, name, description, img_url, start_time, end_time, tag, address, state, city, zip FROM events";
 
         public EventsSqlDao(string dbConnectionString)
         {
