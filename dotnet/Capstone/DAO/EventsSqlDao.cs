@@ -56,8 +56,10 @@ namespace Capstone.DAO
                 StartTime = Convert.ToString(reader["start_time"]),
                 EndTime = Convert.ToString(reader["end_time"]),
                 Tag = Convert.ToString(reader["tag"]),
-                Location = Convert.ToString(reader["location"])
-
+                Address = Convert.ToString(reader["address"]),
+                State = Convert.ToString(reader["state"]),
+                City = Convert.ToString(reader["city"]),
+                Zip = Convert.ToInt32(reader["zip"])
             };
 
             return e;
