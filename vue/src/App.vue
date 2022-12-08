@@ -1,9 +1,24 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">&nbsp;|&nbsp; Logout</router-link>
-      <p v-if="$store.state.user.username"> User is {{$store.state.user.username}}</p>
+      <router-link :to="{ name: 'home' }">
+        <button>
+          <img
+            class="home_icon"
+            src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
+            alt=""
+          />
+          &nbsp;Go Home
+        </button>
+      </router-link>
+      <router-link
+        v-bind:to="{ name: 'logout' }"
+        v-if="$store.state.token != ''"
+        >&nbsp;|&nbsp; Logout</router-link
+      >
+      <p v-if="$store.state.user.username">
+        User is {{ $store.state.user.username }}
+      </p>
     </div>
     <router-view />
   </div>
@@ -12,7 +27,7 @@
 <script>
 import eventsService from "@/services/EventsService.js";
 export default {
- created() {
+  created() {
     eventsService
       .getEvents()
       .then((response) => {
@@ -21,6 +36,28 @@ export default {
       .catch((error) => {
         console.log(error.response.data.status);
       });
-  }, 
-}
+  },
+};
 </script>
+
+<style>
+body {
+  background-color: #f3dfa2;
+}
+
+* {
+  font-family: Verdana, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.home_icon {
+  height: 20px;
+  width: 20px;
+}
+
+
+</style>
