@@ -11,16 +11,6 @@
           id="filter_zip"
           v-model="inputZip"
         />&nbsp;
-      </form>
-            <form>
-        <label for="filter_tags" id="filter_tags">Catagories: </label>
-        <input
-          name="filter_tags"
-          type="text"
-          id="filter_tags"
-          v-model="inputTags"
-        />&nbsp;
-      </form>
       <div id="buttons">
         <button v-on:mouseup="removeText()" id="bc">&lt;==Backspace</button>
         <button v-on:mouseup="inputText(1)" id="b1">1</button>
@@ -34,6 +24,16 @@
         <button v-on:mouseup="inputText(9)" id="b9">9</button>
         <button v-on:mouseup="inputText(0)" id="b0">0</button>
       </div>
+            </form>
+            <form>
+        <label for="filter_tags" id="filter_tags">Catagories: </label>
+        <input
+          name="filter_tags"
+          type="text"
+          id="filter_tags"
+          v-model="inputTags"
+        />&nbsp;
+      </form>
     </div>
     <events
       class="home"
@@ -53,12 +53,8 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
       inputZip: null,
       inputTags: null,
-=======
-      inputZip: '',
->>>>>>> 42a8c7d587b868a03f5759f3d962e2362f419208
     };
   },
   computed: {
