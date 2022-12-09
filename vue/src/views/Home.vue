@@ -1,11 +1,23 @@
 <template>
   <div class="home_page">
-    <p class="home" id="home_header">Tap on an event to see more details</p>
-    <div class="home" id="home_filter">
+    <p class="home_header">Tap on an event to see more details</p>
+    <div class="home_filter">
       <p id="filter_header">Filter</p>
-
       <form>
-        <label for="filter_zip" id="filter_zip">Zip Code: </label>
+        <label id="filter_tag" for="resource_types">Resource Type:</label>
+        <select id="filter_tag" name="resource_types" v-model="inputTag">
+          <option
+            id="filter_tag_options"
+            v-for="(tag, index) in tagsAvailable"
+            v-bind:key="index"
+            :value="tag"
+          >
+            {{ tag }}
+          </option>
+        </select>
+      </form>
+      <form>
+        <label for="filter_zip" id="filter_zip">Zip Code:&nbsp;</label>
         <input
           v-on:click="numpadOn"
           name="filter_zip"
@@ -16,12 +28,12 @@
 
         <div v-if="numpad == true" id="buttons">
           <button type="button" v-on:mouseup="removeText()" id="bc">
-            &lt;==Backspace
+            &lt;==
           </button>
           <button type="button" v-on:mouseup="clearText()" id="clear">
             CLEAR
           </button>
-          <button type="button" v-on:mouseup="numpadOff()" id="bx">X</button>
+          <button type="button" v-on:mouseup="numpadOff()" id="bx">HIDE</button>
           <button type="button" v-on:mouseup="inputText(1)" id="b1">1</button>
           <button type="button" v-on:mouseup="inputText(2)" id="b2">2</button>
           <button type="button" v-on:mouseup="inputText(3)" id="b3">3</button>
@@ -34,18 +46,7 @@
           <button type="button" v-on:mouseup="inputText(0)" id="b0">0</button>
         </div>
       </form>
-      <form>
-        <label for="resource_types">Resource Type:</label>
-        <select name="resource_types" v-model="inputTag">
-          <option
-            v-for="(tag, index) in tagsAvailable"
-            v-bind:key="index"
-            :value="tag"
-          >
-            {{ tag }}
-          </option>
-        </select>
-      </form>
+
     </div>
     <events
       class="home"
@@ -102,7 +103,7 @@ export default {
     },
 
     tagsAvailable() {
-      let output = [''];
+      let output = [""];
       this.$store.state.eventTags.forEach((t) => {
         if (!output.includes(t.tag)) {
           output.push(t.tag);
@@ -130,8 +131,8 @@ export default {
         this.inputZip = this.inputZip.slice(0, -1);
       }
     },
-        clearText() {
-        this.inputZip = ''
+    clearText() {
+      this.inputZip = "";
     },
     numpadOn() {
       this.numpad = true;
@@ -146,17 +147,17 @@ export default {
 <style>
 .home_page {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 3fr;
   grid-template-areas:
     "header header"
     "filter events";
 }
 
-#home_header {
+.home_header {
   grid-area: header;
 }
 
-#home_filter {
+.home_filter {
   grid-area: filter;
   background-color: #7ebdc2;
   margin: 8px;
@@ -165,28 +166,45 @@ export default {
 }
 
 #filter_header {
-  font-size: x-large;
+  font-size: xx-large;
   font-weight: bold;
+  text-align: center;
+  margin: 24px;
 }
 
 #filter_zip {
-  font-size: large;
+  font-size: x-large;
   font-weight: bold;
-  width: 45%;
+  width: 90%;
+  margin-bottom: 8px;
+}
+
+#filter_tag{
+  font-size: x-large;
+  font-weight: bold;
+  width: 90%;
+  margin-bottom: 8px;
+}
+
+#filter_tag_options{
+  font-size: medium;
 }
 
 #buttons {
-  border: 3px solid black;
   display: grid;
-  margin-top: 20px;
-  width: auto;
-  height: 350px;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
-    "clear clear bx"
+    "bc clear bx"
     "b7 b8 b9"
     "b4 b5 b6"
     "b1 b2 b3"
-    "b0 bc bc";
+    "b0 b0 b0";
+  margin-top: 8px;
+  width: auto;
+  height: 350px;
+
+  border: 2px solid black;
+
 }
 
 #bx {
@@ -195,7 +213,6 @@ export default {
 }
 #clear {
   grid-area: clear;
-  background-color: rgb(134, 8, 33);
 }
 #bc {
   grid-area: bc;
