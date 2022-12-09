@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Capstone.Models;
-using Capstone.Security;
-using Capstone.Security.Models;
 
 namespace Capstone.DAO
 {
@@ -11,7 +9,7 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private readonly string sqlGetEvents =
-            "SELECT event_id, name, description, img_url, start_time, end_time, tag, address, state, city, zip FROM events";
+            "SELECT event_id, name, description, img_url, start_time, end_time, address, state, city, zip FROM events";
 
         public EventsSqlDao(string dbConnectionString)
         {
@@ -55,7 +53,6 @@ namespace Capstone.DAO
                 ImgUrl = Convert.ToString(reader["img_url"]),
                 StartTime = Convert.ToString(reader["start_time"]),
                 EndTime = Convert.ToString(reader["end_time"]),
-                Tag = Convert.ToString(reader["tag"]),
                 Address = Convert.ToString(reader["address"]),
                 State = Convert.ToString(reader["state"]),
                 City = Convert.ToString(reader["city"]),
