@@ -64,8 +64,11 @@ export default {
     filteredEvents() {
       //still not sorting
       const EList = this.$store.state.events
-      const sorted = EList.sort((a, b) => {return (new Date(a.date)-new Date(b.date))})
+      console.log(EList)
+      const sorted = EList.sort((a, b) => {return (new Date(a.startTime)-new Date(b.startTime))})
+            console.log(sorted)
       let zipFilter = sorted.filter((e) => {
+              console.log(e)
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
       })
       
