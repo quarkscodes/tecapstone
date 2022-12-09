@@ -6,10 +6,8 @@ namespace Capstone.DAO
     public interface IEventsDao
     {
         List<Event> GetEvents();
-
-        //possible error, string or int?
-        //Event GetEvent(int eventId);
-        //what parameters?
-        //Event AddEvent();
+        bool AddEvent(Event e);
+        bool UpdateEvent(Event e);
+        bool DeleteEvent(int eventId);
     }
 }

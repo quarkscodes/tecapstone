@@ -9,7 +9,13 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private readonly string sqlGetEvents =
-            "SELECT event_id, name, description, img_url, start_time, end_time, address, state, city, zip FROM events";
+            "SELECT event_id, name, description, img_url, start_time, end_time, address, state, city, zip, user_id FROM events;";
+        private readonly string sqlAddEvent =
+            "INSERT INTO events (name, description, img_url, start_time, end_time, address, state, city, zip, user_id) VALUES (@name, @description, @img_url, @start_time, @end_time, @address, @state, @city, @zip, @user_id);";
+        private readonly string sqlUpdateEvent =
+            "UPDATE events SET name = @name, description = @description, img_url = @img_url, start_time = @start_time, end_time = @end_time, address = @address, state = @state, city = @city, zip = @zip, user_id = @user_id WHERE event_id = @event_id;";
+        private readonly string sqlDeleteEvent =
+            "DELETE FROM events WHERE event_id = @event_id;";
 
         public EventsSqlDao(string dbConnectionString)
         {
@@ -43,6 +49,80 @@ namespace Capstone.DAO
             return returnEvents;
         }
 
+        public bool AddEvent(Event e)
+        {
+            int rowsAffected;
+            try
+            {
+                using SqlConnection conn = new SqlConnection(connectionString);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlAddEvent, conn);
+                cmd.Parameters.AddWithValue("@name", e.Name);
+                cmd.Parameters.AddWithValue("@description", e.Description);
+                cmd.Parameters.AddWithValue("@img_url", e.ImgUrl);
+                cmd.Parameters.AddWithValue("@start_time", e.StartTime);
+                cmd.Parameters.AddWithValue("@end_time", e.EndTime);
+                cmd.Parameters.AddWithValue("@address", e.Address);
+                cmd.Parameters.AddWithValue("@city", e.City);
+                cmd.Parameters.AddWithValue("@state", e.State);
+                cmd.Parameters.AddWithValue("@zip", e.Zip);
+                cmd.Parameters.AddWithValue("@user_id", e.UserId);
+
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return rowsAffected > 0;
+        }
+        public bool UpdateEvent(Event e)
+        {
+            int rowsAffected;
+            try
+            {
+                using SqlConnection conn = new SqlConnection(connectionString);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlUpdateEvent, conn);
+                cmd.Parameters.AddWithValue("@name", e.Name);
+                cmd.Parameters.AddWithValue("@description", e.Description);
+                cmd.Parameters.AddWithValue("@img_url", e.ImgUrl);
+                cmd.Parameters.AddWithValue("@start_time", e.StartTime);
+                cmd.Parameters.AddWithValue("@end_time", e.EndTime);
+                cmd.Parameters.AddWithValue("@address", e.Address);
+                cmd.Parameters.AddWithValue("@city", e.City);
+                cmd.Parameters.AddWithValue("@state", e.State);
+                cmd.Parameters.AddWithValue("@zip", e.Zip);
+                cmd.Parameters.AddWithValue("@event_id", e.EventId);
+                cmd.Parameters.AddWithValue("@user_id", e.UserId);
+
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return rowsAffected > 0;
+        }
+        public bool DeleteEvent(int eventId)
+        {
+            int rowsAffected;
+            try
+            {
+                using SqlConnection conn = new SqlConnection(connectionString);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlDeleteEvent, conn);
+                cmd.Parameters.AddWithValue("@event_id", eventId);
+
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
+            return true;
+        }
+
         private Event GetEventFromReader(SqlDataReader reader)
         {
             Event e = new Event()
@@ -56,7 +136,8 @@ namespace Capstone.DAO
                 Address = Convert.ToString(reader["address"]),
                 State = Convert.ToString(reader["state"]),
                 City = Convert.ToString(reader["city"]),
-                Zip = Convert.ToInt32(reader["zip"])
+                Zip = Convert.ToInt32(reader["zip"]),
+                UserId = Convert.ToInt32(reader["user_id"])
             };
 
             return e;

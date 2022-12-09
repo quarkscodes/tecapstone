@@ -34,5 +34,47 @@ namespace Capstone.Controllers
                 return BadRequest("Database not responding");
             }
         }
+        [HttpPost]
+        public IActionResult AddEvent(Event e)
+        {
+            bool added = eventsDao.AddEvent(e);
+
+            if (added)
+            {
+                return Ok(e);
+            }
+            else
+            {
+                return BadRequest("Database not responding");
+            }
+        }
+        [HttpPut]
+        public IActionResult UpdateEvent(Event e)
+        {
+            bool updated = eventsDao.UpdateEvent(e);
+
+            if (updated)
+            {
+                return Ok(e);
+            }
+            else
+            {
+                return BadRequest("Database not responding");
+            }
+        }
+        [HttpDelete("{eventId}")]
+        public IActionResult DeleteEvent(int eventId)
+        {
+            bool deleted = eventsDao.DeleteEvent(eventId);
+
+            if (deleted)
+            {
+                return Ok(eventId);
+            }
+            else
+            {
+                return BadRequest("Database not responding");
+            }
+        }
     }
 }
