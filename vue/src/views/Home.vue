@@ -7,24 +7,31 @@
       <form>
         <label for="filter_zip" id="filter_zip">Zip Code: </label>
         <input
+          v-on:click="numpadOn"
           name="filter_zip"
           type="text"
           id="filter_zip"
           v-model="inputZip"
         />&nbsp;
 
-        <div id="buttons">
-          <button type='button' v-on:mouseup="removeText()" id="bc">&lt;==Backspace</button>
-          <button type='button' v-on:mouseup="inputText(1)" id="b1">1</button>
-          <button type='button' v-on:mouseup="inputText(2)" id="b2">2</button>
-          <button type='button' v-on:mouseup="inputText(3)" id="b3">3</button>
-          <button type='button' v-on:mouseup="inputText(4)" id="b4">4</button>
-          <button type='button' v-on:mouseup="inputText(5)" id="b5">5</button>
-          <button type='button' v-on:mouseup="inputText(6)" id="b6">6</button>
-          <button type='button' v-on:mouseup="inputText(7)" id="b7">7</button>
-          <button type='button' v-on:mouseup="inputText(8)" id="b8">8</button>
-          <button type='button' v-on:mouseup="inputText(9)" id="b9">9</button>
-          <button type='button' v-on:mouseup="inputText(0)" id="b0">0</button>
+        <div v-if="numpad == true" id="buttons">
+          <button type="button" v-on:mouseup="removeText()" id="bc">
+            &lt;==Backspace
+          </button>
+          <button type="button" v-on:mouseup="clearText()" id="clear">
+            CLEAR
+          </button>
+          <button type="button" v-on:mouseup="numpadOff()" id="bx">X</button>
+          <button type="button" v-on:mouseup="inputText(1)" id="b1">1</button>
+          <button type="button" v-on:mouseup="inputText(2)" id="b2">2</button>
+          <button type="button" v-on:mouseup="inputText(3)" id="b3">3</button>
+          <button type="button" v-on:mouseup="inputText(4)" id="b4">4</button>
+          <button type="button" v-on:mouseup="inputText(5)" id="b5">5</button>
+          <button type="button" v-on:mouseup="inputText(6)" id="b6">6</button>
+          <button type="button" v-on:mouseup="inputText(7)" id="b7">7</button>
+          <button type="button" v-on:mouseup="inputText(8)" id="b8">8</button>
+          <button type="button" v-on:mouseup="inputText(9)" id="b9">9</button>
+          <button type="button" v-on:mouseup="inputText(0)" id="b0">0</button>
         </div>
       </form>
       <form>
@@ -36,7 +43,6 @@
           v-model="inputTag"
         />&nbsp;
       </form>
-
     </div>
     <events
       class="home"
@@ -58,28 +64,31 @@ export default {
     return {
       inputZip: "",
       inputTag: "",
+      numpad: false,
     };
   },
   computed: {
     filteredEvents() {
-      //still not sorting
-      const EList = this.$store.state.events
-      console.log(EList)
-      const sorted = EList.sort((a, b) => {return (new Date(a.startTime)-new Date(b.startTime))})
-            console.log(sorted)
+      const EList = this.$store.state.events;
+      console.log(EList);
+      const sorted = EList.sort((a, b) => {
+        return new Date(a.startTime) - new Date(b.startTime);
+      });
+      console.log(sorted);
       let zipFilter = sorted.filter((e) => {
-              console.log(e)
+        console.log(e);
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
-      })
-      
+      });
+
       let typeFilter = [];
       zipFilter.forEach((e) => {
         this.$store.state.eventTags.forEach((t) => {
-          if (!typeFilter.includes(e) &&
-          (this.inputTag == "" ||
-            (t.eventId == e.eventId && t.tag == this.inputTag))
+          if (
+            !typeFilter.includes(e) &&
+            (this.inputTag == "" ||
+              (t.eventId == e.eventId && t.tag == this.inputTag))
           ) {
-              typeFilter.push(e);
+            typeFilter.push(e);
           }
         });
       });
@@ -107,6 +116,15 @@ export default {
       if (this.inputZip !== "") {
         this.inputZip = this.inputZip.slice(0, -1);
       }
+    },
+        clearText() {
+        this.inputZip = ''
+    },
+    numpadOn() {
+      this.numpad = true;
+    },
+    numpadOff() {
+      this.numpad = false;
     },
   },
 };
@@ -151,12 +169,21 @@ export default {
   width: auto;
   height: 350px;
   grid-template-areas:
+    "clear clear bx"
     "b7 b8 b9"
     "b4 b5 b6"
     "b1 b2 b3"
     "b0 bc bc";
 }
 
+#bx {
+  grid-area: bx;
+  background-color: crimson;
+}
+#clear {
+  grid-area: clear;
+  background-color: rgb(134, 8, 33);
+}
 #bc {
   grid-area: bc;
 }
