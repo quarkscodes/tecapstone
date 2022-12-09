@@ -42,7 +42,7 @@
     <events
       class="home"
       id="home_events"
-      v-bind:filteredEvents="filteredEvents.sort(dateSort)"
+      v-bind:filteredEvents="filteredEvents"
     />
   </div>
 </template>
@@ -64,7 +64,7 @@ export default {
   computed: {
     filteredEvents() {
       const EList = this.$store.state.events
-      const sorted = EList.sort((a, b) => {return (new Date(b.date)-new Date(a.date))})
+      const sorted = EList.sort((a, b) => {return (new Date(a.date)-new Date(b.date))})
       return sorted.filter((e) => {
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
       });
@@ -84,14 +84,6 @@ export default {
       }
     },
 
-    dateSort() {
-      //edit this code to filter your list by date
-      // array.sort(function(a,b){
-      //   // Turn your strings into dates, and then subtract them
-      //   // to get a value that is either negative, positive, or zero.
-      //   return new Date(b.date) - new Date(a.date);
-      // });
-    },
     removeText() {
       if (this.inputZip !== "") {
         this.inputZip = this.inputZip.slice(0, -1);
