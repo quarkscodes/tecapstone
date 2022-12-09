@@ -7,16 +7,21 @@
       <form>
         <label for="filter_zip" id="filter_zip">Zip Code: </label>
         <input
+          v-on:click="numpadOn"
           name="filter_zip"
           type="text"
           id="filter_zip"
           v-model="inputZip"
         />&nbsp;
 
-        <div id="buttons">
+        <div v-if="numpad == true" id="buttons">
           <button type="button" v-on:mouseup="removeText()" id="bc">
             &lt;==Backspace
           </button>
+          <button type="button" v-on:mouseup="clearText()" id="clear">
+            CLEAR
+          </button>
+          <button type="button" v-on:mouseup="numpadOff()" id="bx">X</button>
           <button type="button" v-on:mouseup="inputText(1)" id="b1">1</button>
           <button type="button" v-on:mouseup="inputText(2)" id="b2">2</button>
           <button type="button" v-on:mouseup="inputText(3)" id="b3">3</button>
@@ -45,7 +50,7 @@
     <events
       class="home"
       id="home_events"
-      v-bind:filteredEvents="filteredEvents.sort(dateSort)"
+      v-bind:filteredEvents="filteredEvents"
     />
   </div>
 </template>
@@ -62,18 +67,22 @@ export default {
     return {
       inputZip: "",
       inputTag: "",
+      numpad: false,
     };
   },
   computed: {
     filteredEvents() {
-      //still not sorting
-      let EList = this.$store.state.events;
+      const EList = this.$store.state.events;
+      console.log(EList);
       const sorted = EList.sort((a, b) => {
         return new Date(a.startTime) - new Date(b.startTime);
       });
+      console.log(sorted);
       let zipFilter = sorted.filter((e) => {
+        console.log(e);
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
       });
+
       let typeFilter = [];
       zipFilter.forEach((e) => {
         this.$store.state.eventTags.forEach((t) => {
@@ -116,18 +125,19 @@ export default {
       }
     },
 
-    dateSort() {
-      //edit this code to filter your list by date
-      // array.sort(function(a,b){
-      //   // Turn your strings into dates, and then subtract them
-      //   // to get a value that is either negative, positive, or zero.
-      //   return new Date(b.date) - new Date(a.date);
-      // });
-    },
     removeText() {
       if (this.inputZip !== "") {
         this.inputZip = this.inputZip.slice(0, -1);
       }
+    },
+        clearText() {
+        this.inputZip = ''
+    },
+    numpadOn() {
+      this.numpad = true;
+    },
+    numpadOff() {
+      this.numpad = false;
     },
   },
 };
@@ -172,12 +182,21 @@ export default {
   width: auto;
   height: 350px;
   grid-template-areas:
+    "clear clear bx"
     "b7 b8 b9"
     "b4 b5 b6"
     "b1 b2 b3"
     "b0 bc bc";
 }
 
+#bx {
+  grid-area: bx;
+  background-color: crimson;
+}
+#clear {
+  grid-area: clear;
+  background-color: rgb(134, 8, 33);
+}
 #bc {
   grid-area: bc;
 }
