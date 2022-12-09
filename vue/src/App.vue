@@ -11,11 +11,28 @@
           &nbsp;Go Home
         </button>
       </router-link>
-      <router-link
-        v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
-        >&nbsp;|&nbsp; Logout</router-link
-      >
+
+      <router-link :to="{ name: 'login' }" v-if="$store.state.token == ''">
+        <button>
+          <img
+            class="login_icon"
+            src="https://www.nicepng.com/png/full/138-1387674_png-file-svg-user-login-icon-png.png"
+            alt=""
+          />
+          &nbsp;Log In
+        </button>
+      </router-link>
+
+      <router-link :to="{ name: 'logout' }" v-if="$store.state.token != ''">
+        <button>
+          <img
+            class="logout_icon"
+            src="https://www.pngfind.com/pngs/m/339-3396821_png-file-svg-download-icon-logout-transparent-png.png"
+            alt=""
+          />
+          &nbsp; Logout
+        </button>
+      </router-link>
       <p v-if="$store.state.user.username">
         User is {{ $store.state.user.username }}
       </p>
@@ -27,10 +44,9 @@
 <script>
 import eventsService from "@/services/EventsService.js";
 export default {
-  components: {
-  },
+  components: {},
   computed: {
-      eventList() {
+    eventList() {
       return this.$state.store.events;
     },
   },
@@ -62,6 +78,14 @@ a {
 }
 
 .home_icon {
+  height: 20px;
+  width: 20px;
+}
+.login_icon {
+  height: 20px;
+  width: 20px;
+}
+.logout_icon {
   height: 20px;
   width: 20px;
 }

@@ -3,6 +3,7 @@
     <p class="home" id="home_header">Tap on an event to see more details</p>
     <div class="home" id="home_filter">
       <p id="filter_header">Filter</p>
+
       <form>
         <label for="filter_zip" id="filter_zip">Zip Code: </label>
         <input
@@ -11,21 +12,23 @@
           id="filter_zip"
           v-model="inputZip"
         />&nbsp;
-      <div id="buttons">
-        <button v-on:mouseup="removeText()" id="bc">&lt;==Backspace</button>
-        <button v-on:mouseup="inputText(1)" id="b1">1</button>
-        <button v-on:mouseup="inputText(2)" id="b2">2</button>
-        <button v-on:mouseup="inputText(3)" id="b3">3</button>
-        <button v-on:mouseup="inputText(4)" id="b4">4</button>
-        <button v-on:mouseup="inputText(5)" id="b5">5</button>
-        <button v-on:mouseup="inputText(6)" id="b6">6</button>
-        <button v-on:mouseup="inputText(7)" id="b7">7</button>
-        <button v-on:mouseup="inputText(8)" id="b8">8</button>
-        <button v-on:mouseup="inputText(9)" id="b9">9</button>
-        <button v-on:mouseup="inputText(0)" id="b0">0</button>
-      </div>
-            </form>
-            <form>
+
+        <div id="buttons">
+          <button type='button' v-on:mouseup="removeText()" id="bc">&lt;==Backspace</button>
+          <button type='button' v-on:mouseup="inputText(1)" id="b1">1</button>
+          <button type='button' v-on:mouseup="inputText(2)" id="b2">2</button>
+          <button type='button' v-on:mouseup="inputText(3)" id="b3">3</button>
+          <button type='button' v-on:mouseup="inputText(4)" id="b4">4</button>
+          <button type='button' v-on:mouseup="inputText(5)" id="b5">5</button>
+          <button type='button' v-on:mouseup="inputText(6)" id="b6">6</button>
+          <button type='button' v-on:mouseup="inputText(7)" id="b7">7</button>
+          <button type='button' v-on:mouseup="inputText(8)" id="b8">8</button>
+          <button type='button' v-on:mouseup="inputText(9)" id="b9">9</button>
+          <button type='button' v-on:mouseup="inputText(0)" id="b0">0</button>
+        </div>
+      </form>
+
+      <form>
         <label for="filter_tags" id="filter_tags">Catagories: </label>
         <input
           name="filter_tags"
@@ -34,6 +37,7 @@
           v-model="inputTags"
         />&nbsp;
       </form>
+
     </div>
     <events
       class="home"
@@ -53,21 +57,23 @@ export default {
   },
   data() {
     return {
-      inputZip: null,
+      inputZip: '',
       inputTags: null,
     };
   },
   computed: {
     filteredEvents() {
-      return this.$store.state.events.filter((e) => {
+      const EList = this.$store.state.events
+      const sorted = EList.sort((a, b) => {return (new Date(b.date)-new Date(a.date))})
+      return sorted.filter((e) => {
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
       });
     },
   },
   methods: {
     inputText(num) {
-      if (this.inputZip !== '') {
-        let zipString = this.inputZip;
+      if (this.inputZip !== "") {
+        let zipString = this.inputZip.toString();
         console.log(zipString);
         let numString = num.toString();
         console.log(numString);
@@ -87,8 +93,8 @@ export default {
       // });
     },
     removeText() {
-      if (this.inputZip !== '') {
-        this.inputZip = this.inputZip.slice(0,-1);
+      if (this.inputZip !== "") {
+        this.inputZip = this.inputZip.slice(0, -1);
       }
     },
   },
