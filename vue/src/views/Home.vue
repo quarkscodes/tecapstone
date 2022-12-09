@@ -12,6 +12,15 @@
           v-model="inputZip"
         />&nbsp;
       </form>
+            <form>
+        <label for="filter_tags" id="filter_tags">Catagories: </label>
+        <input
+          name="filter_tags"
+          type="text"
+          id="filter_tags"
+          v-model="inputTags"
+        />&nbsp;
+      </form>
       <div id="buttons">
         <button v-on:mouseup="removeText()" id="bc">	&lt;==Backspace</button>
         <button v-on:mouseup="inputText(1)" id="b1">1</button>
@@ -43,6 +52,7 @@ export default {
   data() {
     return {
       inputZip: null,
+      inputTags: null,
     };
   },
   computed: {
