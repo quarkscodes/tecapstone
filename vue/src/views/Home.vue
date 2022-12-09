@@ -27,14 +27,13 @@
           <button type='button' v-on:mouseup="inputText(0)" id="b0">0</button>
         </div>
       </form>
-
       <form>
         <label for="filter_tags" id="filter_tags">Catagories: </label>
         <input
           name="filter_tags"
           type="text"
           id="filter_tags"
-          v-model="inputTags"
+          v-model="inputTag"
         />&nbsp;
       </form>
 
@@ -57,17 +56,34 @@ export default {
   },
   data() {
     return {
-      inputZip: '',
-      inputTags: null,
+      inputZip: "",
+      inputTag: "",
     };
   },
   computed: {
     filteredEvents() {
+      //still not sorting
       const EList = this.$store.state.events
       const sorted = EList.sort((a, b) => {return (new Date(a.date)-new Date(b.date))})
-      return sorted.filter((e) => {
+      let zipFilter = sorted.filter((e) => {
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
+      })
+      
+      let typeFilter = [];
+      zipFilter.forEach((e) => {
+        this.$store.state.eventTags.forEach((t) => {
+          if (!typeFilter.includes(e) &&
+          (this.inputTag == "" ||
+            (t.eventId == e.eventId && t.tag == this.inputTag))
+          ) {
+              typeFilter.push(e);
+          }
+        });
       });
+      return typeFilter;
+    },
+    eventTags() {
+      return this.$store.state.eventTags;
     },
   },
   methods: {

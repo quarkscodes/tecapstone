@@ -9,7 +9,14 @@
     <p class="details" id="details_duration">
       <b>Duration:</b> duration goes here
     </p>
-    <p class="details" id="details_tag">{{ event.tag }}</p>
+    <div id="details_tag">
+      <div v-for="(event_tag, index) in eventTagsList" :key="index">
+        <p id="details_tag" v-if="event_tag.eventId == event.eventId">
+          {{ event_tag.tag }}
+        </p>
+      </div>
+    </div>
+
     <p class="details" id="details_location">
       <b>Location:</b> {{ event.address }}, {{ event.city }}, {{ event.state }},
       {{ event.zip }}
@@ -20,10 +27,14 @@
 
 <script>
 import eventsService from "@/services/EventsService.js";
+import eventTagsService from "@/services/EventTagsService.js";
 
 export default {
   data() {
-    return { event: {} };
+    return {
+      event: {},
+      eventTagsList: [],
+    };
   },
   created() {
     eventsService
@@ -33,6 +44,15 @@ export default {
         this.event = response.data.find((item) => {
           return item.eventId == this.$route.params.id;
         });
+      })
+      .catch((error) => {
+        console.log(error.response.data.status);
+      });
+    eventTagsService
+      .getEventTags()
+      .then((response) => {
+        this.$store.commit("SET_EVENT_TAGS", response.data);
+        this.eventTagsList = response.data;
       })
       .catch((error) => {
         console.log(error.response.data.status);

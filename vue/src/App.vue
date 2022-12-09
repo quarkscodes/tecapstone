@@ -43,11 +43,16 @@
 
 <script>
 import eventsService from "@/services/EventsService.js";
+import eventTagsService from "@/services/EventTagsService.js";
+
 export default {
   components: {},
   computed: {
     eventList() {
       return this.$state.store.events;
+    },
+    eventTagsList() {
+      return this.$state.store.eventTags;
     },
   },
   created() {
@@ -55,6 +60,14 @@ export default {
       .getEvents()
       .then((response) => {
         this.$store.commit("SET_EVENTS", response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.status);
+      });
+    eventTagsService
+      .getEventTags()
+      .then((response) => {
+        this.$store.commit("SET_EVENT_TAGS", response.data);
       })
       .catch((error) => {
         console.log(error.response.data.status);
