@@ -13,7 +13,13 @@
           <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
           <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
         </p>
-        <p class="event" id="event_tag">{{ event.tag }}</p>
+        <div id="event_tag">
+          <div v-for="(event_tag, index) in eventTagsList" :key="index">
+            <p id="event_tag" v-if="event_tag.eventId == event.eventId">
+              {{ event_tag.tag }}
+            </p>
+          </div>
+        </div>
       </div>
     </router-link>
   </div>
@@ -22,7 +28,7 @@
 <script>
 export default {
   name: "Events",
-  props: ['filteredEvents'], //this is the new list to show
+  props: ["filteredEvents", "eventTags"], //this is the new list to show
   methods: {
     DateOnly(date) {
       let text = date.split(" ");
@@ -32,6 +38,9 @@ export default {
   computed: {
     EventList() {
       return this.$store.state.events;
+    },
+    eventTagsList() {
+      return this.$store.state.eventTags;
     },
   },
 };

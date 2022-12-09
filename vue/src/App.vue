@@ -21,20 +21,21 @@
       </p>
     </div>
     <router-view />
-    <!--<div is='Details' v-bind:eventList="events" v:if='false' />-->
   </div>
 </template>
 
 <script>
 import eventsService from "@/services/EventsService.js";
-//import Details from "./views/Details.vue"
+import eventTagsService from "@/services/EventTagsService.js";
+
 export default {
-  components: {
-    //Details,
-  },
+  components: {},
   computed: {
-      eventList() {
+    eventList() {
       return this.$state.store.events;
+    },
+    eventTagsList() {
+      return this.$state.store.eventTags;
     },
   },
   created() {
@@ -42,6 +43,14 @@ export default {
       .getEvents()
       .then((response) => {
         this.$store.commit("SET_EVENTS", response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.status);
+      });
+    eventTagsService
+      .getEventTags()
+      .then((response) => {
+        this.$store.commit("SET_EVENT_TAGS", response.data);
       })
       .catch((error) => {
         console.log(error.response.data.status);

@@ -20,8 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-
-    events: []
+    events: [],
+    eventTags: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -43,6 +43,9 @@ export default new Vuex.Store({
 
     SET_EVENTS(state, events){
       state.events = events;
+    },
+    SET_EVENT_TAGS(state, eventTags){
+      state.eventTags = eventTags;
     }
   }
 })

@@ -12,13 +12,13 @@
           v-model="inputZip"
         />&nbsp;
       </form>
-            <form>
+      <form>
         <label for="filter_tags" id="filter_tags">Catagories: </label>
         <input
           name="filter_tags"
           type="text"
           id="filter_tags"
-          v-model="inputTags"
+          v-model="inputTag"
         />&nbsp;
       </form>
       <div id="buttons">
@@ -53,24 +53,35 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
-      inputZip: null,
-      inputTags: null,
-=======
-      inputZip: '',
->>>>>>> 42a8c7d587b868a03f5759f3d962e2362f419208
+      inputZip: "",
+      inputTag: "",
     };
   },
   computed: {
     filteredEvents() {
-      return this.$store.state.events.filter((e) => {
+      let zipFilter = this.$store.state.events.filter((e) => {
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
       });
+      let typeFilter = [];
+      zipFilter.forEach((e) => {
+        this.$store.state.eventTags.forEach((t) => {
+          if (!typeFilter.includes(e) &&
+          (this.inputTag == "" ||
+            (t.eventId == e.eventId && t.tag == this.inputTag))
+          ) {
+              typeFilter.push(e);
+          }
+        });
+      });
+      return typeFilter;
+    },
+    eventTags() {
+      return this.$store.state.eventTags;
     },
   },
   methods: {
     inputText(num) {
-      if (this.inputZip !== '') {
+      if (this.inputZip !== "") {
         let zipString = this.inputZip;
         console.log(zipString);
         let numString = num.toString();
@@ -91,8 +102,8 @@ export default {
       // });
     },
     removeText() {
-      if (this.inputZip !== '') {
-        this.inputZip = this.inputZip.slice(0,-1);
+      if (this.inputZip !== "") {
+        this.inputZip = this.inputZip.slice(0, -1);
       }
     },
   },
