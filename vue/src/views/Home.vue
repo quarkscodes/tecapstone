@@ -14,29 +14,33 @@
         />&nbsp;
 
         <div id="buttons">
-          <button type='button' v-on:mouseup="removeText()" id="bc">&lt;==Backspace</button>
-          <button type='button' v-on:mouseup="inputText(1)" id="b1">1</button>
-          <button type='button' v-on:mouseup="inputText(2)" id="b2">2</button>
-          <button type='button' v-on:mouseup="inputText(3)" id="b3">3</button>
-          <button type='button' v-on:mouseup="inputText(4)" id="b4">4</button>
-          <button type='button' v-on:mouseup="inputText(5)" id="b5">5</button>
-          <button type='button' v-on:mouseup="inputText(6)" id="b6">6</button>
-          <button type='button' v-on:mouseup="inputText(7)" id="b7">7</button>
-          <button type='button' v-on:mouseup="inputText(8)" id="b8">8</button>
-          <button type='button' v-on:mouseup="inputText(9)" id="b9">9</button>
-          <button type='button' v-on:mouseup="inputText(0)" id="b0">0</button>
+          <button type="button" v-on:mouseup="removeText()" id="bc">
+            &lt;==Backspace
+          </button>
+          <button type="button" v-on:mouseup="inputText(1)" id="b1">1</button>
+          <button type="button" v-on:mouseup="inputText(2)" id="b2">2</button>
+          <button type="button" v-on:mouseup="inputText(3)" id="b3">3</button>
+          <button type="button" v-on:mouseup="inputText(4)" id="b4">4</button>
+          <button type="button" v-on:mouseup="inputText(5)" id="b5">5</button>
+          <button type="button" v-on:mouseup="inputText(6)" id="b6">6</button>
+          <button type="button" v-on:mouseup="inputText(7)" id="b7">7</button>
+          <button type="button" v-on:mouseup="inputText(8)" id="b8">8</button>
+          <button type="button" v-on:mouseup="inputText(9)" id="b9">9</button>
+          <button type="button" v-on:mouseup="inputText(0)" id="b0">0</button>
         </div>
       </form>
       <form>
-        <label for="filter_tags" id="filter_tags">Catagories: </label>
-        <input
-          name="filter_tags"
-          type="text"
-          id="filter_tags"
-          v-model="inputTag"
-        />&nbsp;
+        <label for="resource_types">Resource Type:</label>
+        <select name="resource_types" v-model="inputTag">
+          <option
+            v-for="(tag, index) in tagsAvailable"
+            v-bind:key="index"
+            :value="tag"
+          >
+            {{ tag }}
+          </option>
+        </select>
       </form>
-
     </div>
     <events
       class="home"
@@ -63,19 +67,22 @@ export default {
   computed: {
     filteredEvents() {
       //still not sorting
-      const EList = this.$store.state.events
-      const sorted = EList.sort((a, b) => {return (new Date(b.date)-new Date(a.date))})
+      let EList = this.$store.state.events;
+      const sorted = EList.sort((a, b) => {
+        return new Date(a.startTime) - new Date(b.startTime);
+      });
       let zipFilter = sorted.filter((e) => {
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
       });
       let typeFilter = [];
       zipFilter.forEach((e) => {
         this.$store.state.eventTags.forEach((t) => {
-          if (!typeFilter.includes(e) &&
-          (this.inputTag == "" ||
-            (t.eventId == e.eventId && t.tag == this.inputTag))
+          if (
+            !typeFilter.includes(e) &&
+            (this.inputTag == "" ||
+              (t.eventId == e.eventId && t.tag == this.inputTag))
           ) {
-              typeFilter.push(e);
+            typeFilter.push(e);
           }
         });
       });
@@ -83,6 +90,16 @@ export default {
     },
     eventTags() {
       return this.$store.state.eventTags;
+    },
+
+    tagsAvailable() {
+      let output = [''];
+      this.$store.state.eventTags.forEach((t) => {
+        if (!output.includes(t.tag)) {
+          output.push(t.tag);
+        }
+      });
+      return output;
     },
   },
   methods: {
