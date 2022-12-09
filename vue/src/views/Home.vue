@@ -74,13 +74,10 @@ export default {
   computed: {
     filteredEvents() {
       const EList = this.$store.state.events;
-      console.log(EList);
       const sorted = EList.sort((a, b) => {
         return new Date(a.startTime) - new Date(b.startTime);
       });
-      console.log(sorted);
       let zipFilter = sorted.filter((e) => {
-        console.log(e);
         return e.zip.toString().includes(this.inputZip) || !this.inputZip;
       });
 
