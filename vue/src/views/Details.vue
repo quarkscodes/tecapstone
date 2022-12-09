@@ -9,7 +9,7 @@
     <p class="details" id="details_duration">
       <b>Duration:</b> duration goes here
     </p>
-    <div id="details_tag">
+    <div id="details_tag_list">
       <div v-for="(event_tag, index) in eventTagsList" :key="index">
         <p id="details_tag" v-if="event_tag.eventId == event.eventId">
           {{ event_tag.tag }}
@@ -106,12 +106,22 @@ export default {
   grid-area: end;
   text-align: left;
   font-size: large;
+  margin-top: 8px;
 }
 
 #details_duration {
   grid-area: duration;
   text-align: left;
   font-size: large;
+  margin-top: 8px;
+}
+
+#details_tag_list{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0px;
+  margin-bottom: 8px;
 }
 
 #details_tag {
@@ -119,17 +129,20 @@ export default {
   font-size: large;
   text-align: center;
   border: 4px solid #7ebdc2;
-  margin: auto;
   padding: 4px;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 6px;
+  margin: auto;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 #details_location {
   grid-area: location;
   text-align: left;
   font-size: large;
+  margin-top: 8px;
 }
 
 #details_description {
@@ -138,5 +151,6 @@ export default {
   align-content: left;
   text-align: left;
   font-size: large;
+  margin-top: 8px;
 }
 </style>

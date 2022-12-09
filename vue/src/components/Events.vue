@@ -2,20 +2,19 @@
   <div>
     <router-link
       v-bind:to="{ name: 'details', params: { id: event.eventId } }"
-      class="event_card"
       v-for="event in filteredEvents"
       :key="event.eventId"
     >
-      <div>
+      <div class="event_card">
         <p class="event" id="event_title">{{ event.name }}</p>
         <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
         <p class="event" id="event_dates">
           <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
           <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
         </p>
-        <div id="event_tag">
+        <div id="event_tag_list">
           <div v-for="(event_tag, index) in eventTagsList" :key="index">
-            <p id="event_tag" v-if="event_tag.eventId == event.eventId">
+            <p class="event" id="event_tag" v-if="event_tag.eventId == event.eventId">
               {{ event_tag.tag }}
             </p>
           </div>
@@ -55,7 +54,7 @@ export default {
     "img title dates"
     "img tag tag";
   background-color: #7ebdc2;
-  margin: 16px;
+  margin: 8px;
   padding: 8px;
   border-radius: 12px;
 }
@@ -71,8 +70,10 @@ export default {
   font-size: x-large;
   font-weight: bold;
   background-color: #efe6dd;
+  width: max;
   padding: 12px;
   border-radius: 8px;
+  margin-top: 4px;
 }
 
 #event_image {
@@ -90,8 +91,12 @@ export default {
   border-radius: 12px;
 }
 
-#event_tag {
+#event_tag_list{
   grid-area: tag;
+  display: flex;
+}
+
+#event_tag {
   font-size: large;
   text-align: left;
   background-color: #efe6dd;
@@ -99,6 +104,7 @@ export default {
   padding-left: 8px;
   padding-right: 8px;
   border-radius: 6px;
-  margin-left: 0px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 </style>
