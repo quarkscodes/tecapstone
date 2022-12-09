@@ -22,7 +22,7 @@
         />&nbsp;
       </form>
       <div id="buttons">
-        <button v-on:mouseup="removeText()" id="bc">	&lt;==Backspace</button>
+        <button v-on:mouseup="removeText()" id="bc">&lt;==Backspace</button>
         <button v-on:mouseup="inputText(1)" id="b1">1</button>
         <button v-on:mouseup="inputText(2)" id="b2">2</button>
         <button v-on:mouseup="inputText(3)" id="b3">3</button>
@@ -36,7 +36,9 @@
       </div>
     </div>
     <events
-      class="home" id="home_events" v-bind:filteredEvents="filteredEvents.sort(dateSort)"
+      class="home"
+      id="home_events"
+      v-bind:filteredEvents="filteredEvents.sort(dateSort)"
     />
   </div>
 </template>
@@ -51,8 +53,12 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
       inputZip: null,
       inputTags: null,
+=======
+      inputZip: '',
+>>>>>>> 42a8c7d587b868a03f5759f3d962e2362f419208
     };
   },
   computed: {
@@ -64,34 +70,32 @@ export default {
   },
   methods: {
     inputText(num) {
-      if(this.inputZip>0){
-      let zipString = this.inputZip.toString();
-      console.log(zipString);
-      let numString = num.toString();
-      console.log(numString);
-      let newString = zipString + numString;
-      let newNum = parseInt(newString);
-      this.inputZip = newNum;
-      }
-      else{
-        this.inputZip=num
+      if (this.inputZip !== '') {
+        let zipString = this.inputZip;
+        console.log(zipString);
+        let numString = num.toString();
+        console.log(numString);
+        let newString = zipString.concat(numString);
+        this.inputZip = newString;
+      } else {
+        this.inputZip = num.toString();
       }
     },
 
-      dateSort(){
-        //edit this code to filter your list by date
-// array.sort(function(a,b){
-//   // Turn your strings into dates, and then subtract them
-//   // to get a value that is either negative, positive, or zero.
-//   return new Date(b.date) - new Date(a.date);
-// });
-      },
-      removeText(){
-              if(this.inputZip>0){
-                this.inputZip=Math.floor(this.inputZip / 10)
-              }
+    dateSort() {
+      //edit this code to filter your list by date
+      // array.sort(function(a,b){
+      //   // Turn your strings into dates, and then subtract them
+      //   // to get a value that is either negative, positive, or zero.
+      //   return new Date(b.date) - new Date(a.date);
+      // });
+    },
+    removeText() {
+      if (this.inputZip !== '') {
+        this.inputZip = this.inputZip.slice(0,-1);
       }
     },
+  },
 };
 </script>
 
@@ -134,10 +138,10 @@ export default {
   width: auto;
   height: 350px;
   grid-template-areas:
-    "b0 bc bc"
-    "b1 b2 b3"
+    "b7 b8 b9"
     "b4 b5 b6"
-    "b7 b8 b9";
+    "b1 b2 b3"
+    "b0 bc bc";
 }
 
 #bc {
