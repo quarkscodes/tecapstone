@@ -19,7 +19,7 @@ namespace Capstone.Controllers
             eventsDao = _eventsDao;
         }
 
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult GetEvents()
         {
