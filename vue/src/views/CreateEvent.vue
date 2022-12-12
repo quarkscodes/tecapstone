@@ -35,24 +35,18 @@ export default {
   data() {
     return {
       newEvent: {
-        name: "",
-        description: "",
-        imgUrl: "",
-        startTime: "",
-        endTime: "",
-        address: "",
-        city: "",
-        state: "",
-        zip: Number,
+        userId: this.$store.state.user.userId,
       },
     };
   },
   methods: {
     submitCreate() {
+      this.newEvent.zip = parseInt(this.newEvent.zip);
       eventsService
         .createEvent(this.newEvent)
         .then((response) => {
           if (response.status == 200) {
+            this.$store.commit('ADD_EVENT', this.newEvent)
             this.$router.push("/administration");
           }
         })
