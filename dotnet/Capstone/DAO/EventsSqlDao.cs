@@ -8,6 +8,7 @@ namespace Capstone.DAO
     public class EventsSqlDao : IEventsDao
     {
         private readonly string connectionString;
+        private readonly string sqlGetEvent = "SELECT event_id, name, description, img_url, start_time, end_time, address, state, city, zip, user_id FROM events WHERE event_id = @event_id;";
         private readonly string sqlGetEvents =
             "SELECT event_id, name, description, img_url, start_time, end_time, address, state, city, zip, user_id FROM events;";
         private readonly string sqlAddEvent =
@@ -48,6 +49,33 @@ namespace Capstone.DAO
 
             return returnEvents;
         }
+
+        public Event GetEvent(int EventId)
+        {
+            Event returnEvent = null;
+
+            try
+            {
+                using SqlConnection conn = new SqlConnection(connectionString);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(sqlGetEvent, conn);
+                cmd.Parameters.AddWithValue("@event_id", EventId);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    returnEvent = GetEventFromReader(reader);
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return returnEvent;
+        }
+
 
         public bool AddEvent(Event e)
         {
