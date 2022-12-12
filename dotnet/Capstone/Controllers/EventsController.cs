@@ -22,7 +22,7 @@ namespace Capstone.Controllers
             userDao = _userDao;
         }
 
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult GetEvents()
         {
