@@ -8,6 +8,8 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import NotFound from '@/views/NotFound.vue'
 import Details from '../views/Details.vue'
+import Administration from '@/views/Administration.vue'
+import CreateEvent from '@/views/CreateEvent.vue'
 
 Vue.use(Router)
 
@@ -33,7 +35,23 @@ const router = new Router({
       }
     },
     {
-      path: "/item/:id",
+      path: "/administration",
+      name: "administration",
+      component: Administration,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/events/create",
+      name: "createEvent",
+      component: CreateEvent,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/events/:id",
       name: "details",
       component: Details,
       meta: {
