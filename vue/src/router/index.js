@@ -11,6 +11,7 @@ import Details from '../views/Details.vue'
 import Administration from '@/views/Administration.vue'
 import CreateEvent from '@/views/CreateEvent.vue'
 import UpdateEvent from '@/views/UpdateEvent.vue'
+import DeleteEvent from '@/views/DeleteEvent.vue'
 
 Vue.use(Router)
 
@@ -55,6 +56,14 @@ const router = new Router({
       path: "/administration/updateevent",
       name: "updateEvent",
       component: UpdateEvent,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/deleteEvent",
+      name: "deleteEvent",
+      component: DeleteEvent,
       meta: {
         requiresAuth: true
       }

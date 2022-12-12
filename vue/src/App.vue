@@ -60,15 +60,6 @@ import eventsService from "@/services/EventsService.js";
 import eventTagsService from "@/services/EventTagsService.js";
 
 export default {
-  components: {},
-  computed: {
-    eventList() {
-      return this.$state.store.events;
-    },
-    eventTagsList() {
-      return this.$state.store.eventTags;
-    },
-  },
   created() {
     eventsService
       .getEvents()

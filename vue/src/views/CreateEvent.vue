@@ -71,7 +71,14 @@ export default {
         .createEvent(this.newEvent)
         .then((response) => {
           if (response.status == 200) {
-            this.$store.commit('ADD_EVENT', this.newEvent)
+            eventsService
+              .getEvents()
+              .then(response => {
+                this.$store.commit('SET_EVENTS', response.data);
+              })
+              .catch(error => {
+                console.log(error.response.data.status);
+              })
             this.$router.push("/administration");
           }
         })
