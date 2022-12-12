@@ -14,7 +14,11 @@
         </p>
         <div id="event_tag_list">
           <div v-for="(event_tag, index) in eventTagsList" :key="index">
-            <p class="event" id="event_tag" v-if="event_tag.eventId == event.eventId">
+            <p
+              class="event"
+              id="event_tag"
+              v-if="event_tag.eventId == event.eventId"
+            >
               {{ event_tag.tag }}
             </p>
           </div>
@@ -91,7 +95,7 @@ export default {
   border-radius: 12px;
 }
 
-#event_tag_list{
+#event_tag_list {
   grid-area: tag;
   display: flex;
 }

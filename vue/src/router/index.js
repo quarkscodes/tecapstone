@@ -10,6 +10,7 @@ import NotFound from '@/views/NotFound.vue'
 import Details from '../views/Details.vue'
 import Administration from '@/views/Administration.vue'
 import CreateEvent from '@/views/CreateEvent.vue'
+import UpdateEvent from '@/views/UpdateEvent.vue'
 
 Vue.use(Router)
 
@@ -46,6 +47,14 @@ const router = new Router({
       path: "/administration/createevent",
       name: "createEvent",
       component: CreateEvent,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/administration/updateevent",
+      name: "updateEvent",
+      component: UpdateEvent,
       meta: {
         requiresAuth: true
       }
