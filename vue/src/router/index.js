@@ -10,6 +10,7 @@ import NotFound from '@/views/NotFound.vue'
 import Details from '../views/Details.vue'
 import Administration from '@/views/Administration.vue'
 import CreateEvent from '@/views/CreateEvent.vue'
+import DeleteEvent from '@/views/DeleteEvent.vue'
 
 Vue.use(Router)
 
@@ -43,9 +44,17 @@ const router = new Router({
       }
     },
     {
-      path: "/events/create",
+      path: "/admin/createEvent",
       name: "createEvent",
       component: CreateEvent,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/deleteEvent",
+      name: "deleteEvent",
+      component: DeleteEvent,
       meta: {
         requiresAuth: true
       }

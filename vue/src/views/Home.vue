@@ -152,8 +152,6 @@ export default {
 
 .home_header {
   grid-area: header;
-  margin: 12px;
-  margin-top: 32px;
 }
 
 .home_filter {
