@@ -1,10 +1,12 @@
 <template>
   <div>
+    <!--link to details view-->
     <router-link
-      v-bind:to="{ name: 'details', params: { id: event.eventId } }"
+      :to="{ name: 'details', params: { id: event.eventId } }"
       v-for="event in filteredEvents"
       :key="event.eventId"
     >
+      <!--event cards-->
       <div class="event_card">
         <p class="event" id="event_title">{{ event.name }}</p>
         <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
@@ -28,13 +30,13 @@
 
     <div v-if="deleting" class="popup">
       Are you sure you want to delete this event?
-      <button v-on:click="deleteEvent(eventId)" class="popupInfo">Yes</button>
-      <button v-on:click="notSure" class="popupInfo">Cancel</button>
+      <button @:click="deleteEvent(eventId)" class="popupInfo">Yes</button>
+      <button @:click="notSure" class="popupInfo">Cancel</button>
     </div>
 
     <div v-for="event in yourEvents" :key="event.eventId">
       <router-link
-        v-bind:to="{ name: 'details', params: { id: event.eventId } }"
+        :to="{ name: 'details', params: { id: event.eventId } }"
       >
         <div class="event_card">
           <p class="event" id="event_title">{{ event.name }}</p>
