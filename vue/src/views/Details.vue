@@ -116,7 +116,7 @@ export default {
   margin-top: 8px;
 }
 
-#details_tag_list{
+#details_tag_list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

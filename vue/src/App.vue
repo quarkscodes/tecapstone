@@ -11,6 +11,7 @@
           &nbsp;Go Home
         </button>
       </router-link>
+      &nbsp;
 
       <router-link :to="{ name: 'login' }" v-if="$store.state.token == ''">
         <button>
@@ -33,9 +34,10 @@
           &nbsp; Logout
         </button>
       </router-link>
-      <p v-if="$store.state.user.username">
-        User is {{ $store.state.user.username }}
-      </p>
+
+      <a v-if="$store.state.user.username">
+        &nbsp;Welcome, {{ $store.state.user.username }}
+      </a>
     </div>
     <router-view />
   </div>

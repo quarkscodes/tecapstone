@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import store from '../store/index'
+import store from '../store/index'
 
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
@@ -75,17 +75,13 @@ const router = new Router({
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   // Determine if the route requires Authentication
-//   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-
-//   // If it does and they are not logged in, send the user to "/login"
-//   if (requiresAuth && store.state.token === '') {
-//     next("/login");
-//   } else {
-//     // Else let them go to their next destination
-//     next();
-//   }
-// });
+ router.beforeEach((to, from, next) => {
+   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+   if (requiresAuth && store.state.token === '') {
+     next("/login");
+   } else {
+     next();
+   }
+ });
 
 export default router;
