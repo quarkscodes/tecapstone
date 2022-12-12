@@ -8,7 +8,19 @@
             src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
             alt=""
           />
-          &nbsp;Go Home
+          &nbsp;Home
+        </button>
+      </router-link>
+
+      <router-link :to="{ name: 'administration' }" v-if="$store.state.token != ''">
+        &nbsp;
+        <button>
+          <img
+            class="home_icon"
+            src="http://cdn.onlinewebfonts.com/svg/img_184513.png"
+            alt=""
+          />
+          &nbsp;Menu
         </button>
       </router-link>
       &nbsp;
@@ -48,15 +60,6 @@ import eventsService from "@/services/EventsService.js";
 import eventTagsService from "@/services/EventTagsService.js";
 
 export default {
-  components: {},
-  computed: {
-    eventList() {
-      return this.$state.store.events;
-    },
-    eventTagsList() {
-      return this.$state.store.eventTags;
-    },
-  },
   created() {
     eventsService
       .getEvents()

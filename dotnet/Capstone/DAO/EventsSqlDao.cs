@@ -79,6 +79,8 @@ namespace Capstone.DAO
 
         public bool AddEvent(Event e)
         {
+            DateTime startTime = DateTime.Parse(e.StartTime);
+            DateTime endTime = DateTime.Parse(e.EndTime);
             int rowsAffected;
             try
             {
@@ -88,8 +90,8 @@ namespace Capstone.DAO
                 cmd.Parameters.AddWithValue("@name", e.Name);
                 cmd.Parameters.AddWithValue("@description", e.Description);
                 cmd.Parameters.AddWithValue("@img_url", e.ImgUrl);
-                cmd.Parameters.AddWithValue("@start_time", e.StartTime);
-                cmd.Parameters.AddWithValue("@end_time", e.EndTime);
+                cmd.Parameters.AddWithValue("@start_time", startTime);
+                cmd.Parameters.AddWithValue("@end_time", endTime);
                 cmd.Parameters.AddWithValue("@address", e.Address);
                 cmd.Parameters.AddWithValue("@city", e.City);
                 cmd.Parameters.AddWithValue("@state", e.State);

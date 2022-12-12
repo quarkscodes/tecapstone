@@ -44,7 +44,7 @@ const router = new Router({
       }
     },
     {
-      path: "/admin/createEvent",
+      path: "/administration/createevent",
       name: "createEvent",
       component: CreateEvent,
       meta: {

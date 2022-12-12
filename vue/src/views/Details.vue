@@ -16,7 +16,6 @@
         </p>
       </div>
     </div>
-
     <p class="details" id="details_location">
       <b>Location:</b> {{ event.address }}, {{ event.city }}, {{ event.state }},
       {{ event.zip }}
