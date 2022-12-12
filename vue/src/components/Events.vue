@@ -35,9 +35,6 @@ export default {
     },
   },
   computed: {
-    EventList() {
-      return this.$store.state.events;
-    },
     eventTagsList() {
       return this.$store.state.eventTags;
     },
