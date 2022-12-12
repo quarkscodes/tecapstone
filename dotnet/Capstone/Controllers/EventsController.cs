@@ -13,13 +13,16 @@ namespace Capstone.Controllers
     public class EventsController : Controller
     {
         private readonly IEventsDao eventsDao;
+        private readonly IUserDao userDao;
 
-        public EventsController (IEventsDao _eventsDao)
+
+        public EventsController(IEventsDao _eventsDao, IUserDao _userDao)
         {
             eventsDao = _eventsDao;
+            userDao = _userDao;
         }
 
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult GetEvents()
         {
@@ -37,43 +40,64 @@ namespace Capstone.Controllers
         [HttpPost()]
         public IActionResult AddEvent(Event e)
         {
-            bool added = eventsDao.AddEvent(e);
-
-            if (added)
+            if (e.UserId == userDao.GetUser(User.Identity.Name).UserId)
             {
-                return Ok(e);
+                bool added = eventsDao.AddEvent(e);
+
+                if (added)
+                {
+                    return Ok(e);
+                }
+                else
+                {
+                    return BadRequest("Database not responding");
+                }
             }
             else
             {
-                return BadRequest("Database not responding");
+                return Unauthorized("Not Authorized");
             }
         }
         [HttpPut]
         public IActionResult UpdateEvent(Event e)
         {
-            bool updated = eventsDao.UpdateEvent(e);
-
-            if (updated)
+            if (e.UserId == userDao.GetUser(User.Identity.Name).UserId)
             {
-                return Ok(e);
+                bool updated = eventsDao.UpdateEvent(e);
+
+                if (updated)
+                {
+                    return Ok(e);
+                }
+                else
+                {
+                    return BadRequest("Database not responding");
+                }
             }
             else
             {
-                return BadRequest("Database not responding");
+                return Unauthorized("Not Authorized");
             }
         }
         [HttpDelete("{eventId}")]
         public IActionResult DeleteEvent(int eventId)
         {
-            bool deleted = eventsDao.DeleteEvent(eventId);
-
-            if (deleted)
+            if (eventsDao.GetEvent(eventId).UserId == userDao.GetUser(User.Identity.Name).UserId)
             {
-                return Ok(eventId);
+                bool deleted = eventsDao.DeleteEvent(eventId);
+
+                if (deleted)
+                {
+                    return Ok(eventId);
+                }
+                else
+                {
+                    return BadRequest("Database not responding");
+                }
             }
             else
             {
-                return BadRequest("Database not responding");
+                return Unauthorized("Not Authorized");
             }
         }
     }
