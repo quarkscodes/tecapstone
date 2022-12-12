@@ -1,18 +1,17 @@
 <template>
   <div>
-    <form class="choose-update" v-on:submit.prevent="">
+    <form class="choose-update" v-on:submit.prevent="setEvent(e)">
       <label for="choose-event">Choose an event:&nbsp;</label>
-      <select name="choose-event" id="choose-event" v-model="updateEvent.eventId">
+      <select name="choose-event" id="choose-event" v-model="updateEvent">
         <option
           id="choose-event-options"
           v-for="(event, index) in filteredEvents"
           :key="index"
-          :value="event.name"
+          :value="event"
         >
           {{ event.name }}
         </option>
       </select>
-      <button type="submit">submit</button>
     </form>
     <form class="update" v-on:submit.prevent="submitUpdate">
       <div id="update">
@@ -35,19 +34,13 @@
       </div>
       <div id="update">
         <label for="start_time">Start Date and Time:<br /></label>
-        <input
-          type="datetime-local"
-          id="start_time"
-          v-model="updateEvent.startTime"
-        />
+        <d>(MM/DD/YYYY HH/MM/SS [A/P]M)</d><br />
+        <input id="start_time" v-model="updateEvent.startTime" />
       </div>
       <div id="update">
         <label for="end_time">End Date and Time:<br /></label>
-        <input
-          type="datetime-local"
-          id="end_time"
-          v-model="updateEvent.endTime"
-        />
+        <d>(MM/DD/YYYY HH/MM/SS [A/P]M)</d><br />
+        <input id="end_time" v-model="updateEvent.endTime" />
       </div>
       <div id="update">
         <label for="address">Address:<br /></label>
@@ -87,7 +80,7 @@ export default {
       .getEvents()
       .then((response) => {
         this.$store.commit("SET_EVENTS", response.data);
-        console.log(this.$store.state.events)
+        console.log(this.$store.state.events);
       })
       .catch((error) => {
         console.log(error.response.data.status);
@@ -102,18 +95,29 @@ export default {
       });
   },
   methods: {
-    selectUpdate() {
-      this.updateEvent = 0;
-      return true;
-    },
     submitUpdate() {
-      return true;
+      this.updateEvent.zip = parseInt(this.updateEvent.zip);
+      eventsService
+      .updateEvent(this.updateEvent)
+      .then((response) => {
+        if (response.status == 200) {
+          eventsService
+            .getEvents()
+            .then((response) => {
+              this.$store.commit("SET_EVENTS", response.data);
+            })
+            .catch((error) => {
+              console.log(error.response.data.status);
+            });
+          this.$router.push("/administration");
+        }
+      });
     },
   },
   computed: {
     filteredEvents() {
       const sorted = this.$store.state.events;
-      console.log("sorted = " + sorted)
+      console.log("sorted = " + sorted);
       let userFilter = sorted.filter((e) => {
         return e.userId == this.$store.state.user.userId;
       });
@@ -131,6 +135,9 @@ export default {
   padding: 5%;
   margin: 32px 15%;
 }
+.choose-update {
+  margin: 8px;
+}
 div #update {
   display: flexbox;
   background: #efe6dd;
@@ -147,8 +154,11 @@ div #update {
   padding: 4px;
 }
 #description {
-  height: 85px;
+  height: 80px;
   width: 95%;
   resize: none;
+}
+d {
+  font-size: small;
 }
 </style>

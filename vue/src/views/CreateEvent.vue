@@ -2,11 +2,11 @@
   <div>
     <form class="create" v-on:submit.prevent="submitCreate">
       <div id="create">
-        <label for="name">Event Name:<br/></label>
+        <label for="name">Event Name:<br /></label>
         <input type="text" id="name" v-model="newEvent.name" required />
       </div>
       <div id="create">
-        <label for="description">Description:<br/></label>
+        <label for="description">Description:<br /></label>
         <textarea
           type="textarea"
           id="description"
@@ -16,11 +16,11 @@
         />
       </div>
       <div id="create">
-        <label for="img_url">Image URL:<br/></label>
+        <label for="img_url">Image URL:<br /></label>
         <input type="text" id="img_url" v-model="newEvent.imgUrl" />
       </div>
       <div id="create">
-        <label for="start_time">Start Date and Time:<br/></label>
+        <label for="start_time">Start Date and Time:<br /></label>
         <input
           type="datetime-local"
           id="start_time"
@@ -28,23 +28,23 @@
         />
       </div>
       <div id="create">
-        <label for="end_time">End Date and Time:<br/></label>
+        <label for="end_time">End Date and Time:<br /></label>
         <input type="datetime-local" id="end_time" v-model="newEvent.endTime" />
       </div>
       <div id="create">
-        <label for="address">Address:<br/></label>
+        <label for="address">Address:<br /></label>
         <input type="text" id="address" v-model="newEvent.address" />
       </div>
       <div id="create">
-        <label for="city">City:<br/></label>
+        <label for="city">City:<br /></label>
         <input type="text" id="city" v-model="newEvent.city" />
       </div>
       <div id="create">
-        <label for="state">State:<br/></label>
+        <label for="state">State:<br /></label>
         <input type="text" id="state" v-model="newEvent.state" />
       </div>
       <div id="create">
-        <label for="zip">Zip:<br/></label>
+        <label for="zip">Zip:<br /></label>
         <input type="number" id="zip" v-model="newEvent.zip" />
       </div>
       <button type="submit" id="submit">Submit</button>
@@ -73,12 +73,12 @@ export default {
           if (response.status == 200) {
             eventsService
               .getEvents()
-              .then(response => {
-                this.$store.commit('SET_EVENTS', response.data);
+              .then((response) => {
+                this.$store.commit("SET_EVENTS", response.data);
               })
-              .catch(error => {
+              .catch((error) => {
                 console.log(error.response.data.status);
-              })
+              });
             this.$router.push("/administration");
           }
         })
@@ -105,15 +105,15 @@ div #create {
   margin: 4px;
   border-radius: 4px;
 }
-#create input{
-  width:95%;
+#create input {
+  width: 95%;
 }
-.create button{
+.create button {
   margin: 8px;
   margin-bottom: 0px;
   padding: 4px;
 }
-#description{
+#description {
   height: 85px;
   width: 95%;
   resize: none;
