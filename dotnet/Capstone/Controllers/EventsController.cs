@@ -40,8 +40,6 @@ namespace Capstone.Controllers
         [HttpPost()]
         public IActionResult AddEvent(Event e)
         {
-            if (e.UserId == userDao.GetUser(User.Identity.Name).UserId)
-            {
                 bool added = eventsDao.AddEvent(e);
 
                 if (added)
@@ -52,11 +50,6 @@ namespace Capstone.Controllers
                 {
                     return BadRequest("Database not responding");
                 }
-            }
-            else
-            {
-                return Unauthorized("Not Authorized");
-            }
         }
         [HttpPut]
         public IActionResult UpdateEvent(Event e)
