@@ -10,8 +10,8 @@ import NotFound from '@/views/NotFound.vue'
 import Details from '../views/Details.vue'
 import Administration from '@/views/Administration.vue'
 import CreateEvent from '@/views/CreateEvent.vue'
-import UpdateEvent from '@/views/UpdateEvent.vue'
 import DeleteEvent from '@/views/DeleteEvent.vue'
+import EditTags from '@/views/EditTags.vue'
 
 Vue.use(Router)
 
@@ -53,17 +53,17 @@ const router = new Router({
       }
     },
     {
-      path: "/administration/updateevent",
-      name: "updateEvent",
-      component: UpdateEvent,
+      path: "/deleteEvent",
+      name: "deleteEvent",
+      component: DeleteEvent,
       meta: {
         requiresAuth: true
       }
     },
     {
-      path: "/deleteEvent",
-      name: "deleteEvent",
-      component: DeleteEvent,
+      path: "/editTags",
+      name: "editTags",
+      component: EditTags,
       meta: {
         requiresAuth: true
       }

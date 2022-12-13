@@ -26,6 +26,11 @@
           Delete Event
         </button>
       </router-link>
+      <router-link :to="{ name: 'editTags' }">
+        <button id="option">
+          Modify Tags
+        </button>
+      </router-link>
       <router-link :to="{ name: 'register' }">
         <button id="option">
           Register New Admin
