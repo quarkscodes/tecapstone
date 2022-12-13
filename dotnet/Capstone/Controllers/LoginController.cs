@@ -24,7 +24,7 @@ namespace Capstone.Controllers
         }
 
         //todo reroute
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Ready()
         {
@@ -78,7 +78,7 @@ namespace Capstone.Controllers
                 return Conflict(new { message = "Username already taken. Please choose a different username." });
             }
 
-            User user = userDao.AddUser(userParam.Username, userParam.Password, userParam.Role);
+            User user = userDao.AddUser(userParam);
             if (user != null)
             {
                 result = Created(user.Username, null); //values aren't read on client

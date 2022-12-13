@@ -7,6 +7,6 @@ namespace Capstone.DAO
     {
         User GetUser(string username);
         List<User> GetUsers();
-        User AddUser(string username, string password, string role);
+        User AddUser(RegisterUser user);
     }
 }
