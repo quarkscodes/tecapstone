@@ -9,7 +9,9 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
         private readonly string sqlGetEventTags =
-            "SELECT event_id, tag_name FROM event_tags";
+            "SELECT event_id, tag_name FROM event_tags;";
+        private readonly string sqlDeleteByEventId =
+            "DELETE FROM event_tags WHERE event_id = @event_id;";
 
         public EventTagsSqlDao(string dbConnectionString)
         {
@@ -34,6 +36,17 @@ namespace Capstone.DAO
             }
 
             return returnEventTags;
+        }
+
+        public bool DeleteByEventId(int eventId)
+        {
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(sqlDeleteByEventId, conn);
+            cmd.Parameters.AddWithValue("@event_id", eventId);
+
+            return cmd.ExecuteNonQuery() > 0;
         }
 
         private EventTag GetEventTagFromReader(SqlDataReader reader)

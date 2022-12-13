@@ -5,7 +5,7 @@ namespace Capstone.DAO
 {
     public interface IEventsDao
     {
-        public Event GetEvent(int EventId);
+        Event GetEvent(int EventId);
         List<Event> GetEvents();
         bool AddEvent(Event e);
         bool UpdateEvent(Event e);

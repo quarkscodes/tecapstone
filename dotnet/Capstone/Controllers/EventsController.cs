@@ -14,12 +14,14 @@ namespace Capstone.Controllers
     {
         private readonly IEventsDao eventsDao;
         private readonly IUserDao userDao;
+        private readonly IEventTagsDao eventTagsDao;
 
 
-        public EventsController(IEventsDao _eventsDao, IUserDao _userDao)
+        public EventsController(IEventsDao _eventsDao, IUserDao _userDao, IEventTagsDao _eventTagsDao)
         {
             eventsDao = _eventsDao;
             userDao = _userDao;
+            eventTagsDao = _eventTagsDao;
         }
 
         [HttpGet]
@@ -77,6 +79,8 @@ namespace Capstone.Controllers
         {
             if (eventsDao.GetEvent(eventId).UserId == userDao.GetUser(User.Identity.Name).UserId)
             {
+                eventTagsDao.DeleteByEventId(eventId);
+
                 bool deleted = eventsDao.DeleteEvent(eventId);
 
                 if (deleted)

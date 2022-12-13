@@ -44,7 +44,7 @@ namespace Capstone.DAO
             return returnEvents;
         }
 
-        public Event GetEvent(int EventId)
+        public Event GetEvent(int eventId)
         {
             Event returnEvent = null;
 
@@ -52,7 +52,8 @@ namespace Capstone.DAO
             conn.Open();
 
             SqlCommand cmd = new SqlCommand(sqlGetEvent, conn);
-            cmd.Parameters.AddWithValue("@event_id", EventId);
+            cmd.Parameters.AddWithValue("@event_id", eventId);
+
             SqlDataReader reader = cmd.ExecuteReader();
 
             if (reader.Read())

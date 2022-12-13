@@ -9,5 +9,6 @@ namespace Capstone.DAO
     public interface IEventTagsDao
     {
         List<EventTag> GetEventTags();
+        bool DeleteByEventId(int eventId);
     }
 }
