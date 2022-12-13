@@ -12,6 +12,10 @@ namespace Capstone.DAO
             "SELECT event_id, tag_name FROM event_tags;";
         private readonly string sqlDeleteByEventId =
             "DELETE FROM event_tags WHERE event_id = @event_id;";
+        private readonly string sqlDeleteEventTag =
+            "DELETE FROM event_tags WHERE tag_name = @tag_name;";
+        private readonly string sqlAddNewEventTag =
+            "INSERT INTO event_tags (tag_name, event_id) VALUES (@tag_name, @event_id);";
 
         public EventTagsSqlDao(string dbConnectionString)
         {
@@ -45,6 +49,29 @@ namespace Capstone.DAO
 
             SqlCommand cmd = new SqlCommand(sqlDeleteByEventId, conn);
             cmd.Parameters.AddWithValue("@event_id", eventId);
+
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+        public bool DeleteEventTag(string tagName)
+        {
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(sqlDeleteEventTag, conn);
+            cmd.Parameters.AddWithValue("@tag_name", tagName);
+
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+        public bool AddEventTag(EventTag tag)
+        {
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(sqlAddNewEventTag, conn);
+            cmd.Parameters.AddWithValue("@tag_name", tag.Tag);
+            cmd.Parameters.AddWithValue("@event_id", tag.EventId);
 
             return cmd.ExecuteNonQuery() > 0;
         }

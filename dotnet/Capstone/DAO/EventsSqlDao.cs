@@ -114,8 +114,6 @@ namespace Capstone.DAO
         }
         public bool DeleteEvent(int eventId)
         {
-            //todo delete all references (event_tags) to event id
-
             using SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             SqlCommand cmd = new SqlCommand(sqlDeleteEvent, conn);

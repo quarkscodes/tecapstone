@@ -19,7 +19,7 @@ namespace Capstone.Controllers
             eventTagsDao = _eventTagsDao;
         }
 
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult GetEventTags()
         {
@@ -28,6 +28,35 @@ namespace Capstone.Controllers
             if (eventTags != null && eventTags.Count > 0)
             {
                 return Ok(eventTags);
+            }
+            else
+            {
+                return BadRequest("Database not responding");
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteEventTag(string tag)
+        {
+            bool result = eventTagsDao.DeleteEventTag(tag);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Database not responding");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddEventTag(EventTag tag)
+        {
+            bool result = eventTagsDao.AddEventTag(tag);
+
+            if (result)
+            {
+                return Ok();
             }
             else
             {
