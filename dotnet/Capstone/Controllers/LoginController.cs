@@ -40,6 +40,13 @@ namespace Capstone.Controllers
             }
         }
 
+        [HttpGet("/get")]
+        [AllowAnonymous]
+        public User GetUser(string username)
+        {
+            return userDao.GetUser(username);
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public IActionResult Authenticate(LoginUser userParam)

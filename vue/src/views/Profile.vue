@@ -14,7 +14,7 @@
           id="username"
           class="form-control"
           placeholder="Username"
-          v-model="user.username"
+          v-model="thisUser.username"
           required
           autofocus
         />
@@ -24,7 +24,7 @@
           id="organization"
           class="form-control"
           placeholder="Organization"
-          v-model="user.organization"
+          v-model="thisUser.organization"
           required
         />
         <label for="location" class="sr-only"><h3>Location</h3></label>
@@ -33,7 +33,7 @@
           id="location"
           class="form-control"
           placeholder="Location"
-          v-model="user.location"
+          v-model="thisUser.location"
           required
         />
         <label for="name" class="sr-only"><h3>Name</h3></label>
@@ -42,7 +42,7 @@
           id="name"
           class="form-control"
           placeholder="Name"
-          v-model="user.name"
+          v-model="thisUser.name"
           required
         />
         <label for="phone" class="sr-only"><h3>Phone</h3></label>
@@ -51,7 +51,7 @@
           id="phone"
           class="form-control"
           placeholder="Phone"
-          v-model="user.phone"
+          v-model="thisUser.phone"
           required
         />
         <label for="email" class="sr-only"><h3>Email</h3></label>
@@ -60,7 +60,7 @@
           id="email"
           class="form-control"
           placeholder="Email"
-          v-model="user.email"
+          v-model="thisUser.email"
           required
         />
         <label for="password" class="sr-only"><h3>Password</h3></label>
@@ -69,7 +69,7 @@
           id="password"
           class="form-control"
           placeholder="Password"
-          v-model="user.password"
+          v-model="thisUser.password"
           required
         />
         <input
@@ -77,7 +77,7 @@
           id="confirmPassword"
           class="form-control"
           placeholder="Confirm Password"
-          v-model="user.confirmPassword"
+          v-model="thisUser.confirmPassword"
           required
         />
       </div>
@@ -90,23 +90,13 @@
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import authService from "@/services/AuthService.js";
 
 export default {
   name: "profile",
   data() {
     return {
-      user: {
-        username: "",
-        organization:"",
-        location:"",
-        name:"",
-        phone:"",
-        email:"",
-        password: "",
-        confirmPassword: "",
-        role: "admin",
-      },
+      user: {},
       updateErrors: false,
       updateErrorMsg: "There were problems updating this user.",
     };

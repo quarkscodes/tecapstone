@@ -46,8 +46,8 @@ const router = new Router({
       }
     },
     {
-      path: '/administration/profile',
-      name: 'profile',
+      path: "/administration/profile",
+      name: "profile",
       component: Profile,
       meta: {
         requiresAuth: false
