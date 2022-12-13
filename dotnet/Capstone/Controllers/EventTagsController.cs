@@ -36,7 +36,7 @@ namespace Capstone.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteEventTag(string tag)
+        public IActionResult DeleteEventTag(EventTag tag)
         {
             bool result = eventTagsDao.DeleteEventTag(tag);
             if (result)
