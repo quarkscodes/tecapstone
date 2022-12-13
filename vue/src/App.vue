@@ -1,52 +1,53 @@
 <template>
   <div id="app">
     <div id="nav">
+      <!--home button-->
       <router-link :to="{ name: 'home' }">
         <button>
           <img
-            class="home_icon"
+            class="icon"
             src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
             alt=""
           />
-          &nbsp;Home
+          <t>&nbsp;Home</t>
         </button>
       </router-link>
-
+      <!--admin menu button-->
       <router-link :to="{ name: 'administration' }" v-if="$store.state.token != ''">
         &nbsp;
         <button>
           <img
-            class="home_icon"
+            class="icon"
             src="http://cdn.onlinewebfonts.com/svg/img_184513.png"
             alt=""
           />
-          &nbsp;Menu
+          <t>&nbsp;Menu</t>
         </button>
       </router-link>
       &nbsp;
-
+      <!--login button-->
       <router-link :to="{ name: 'login' }" v-if="$store.state.token == ''">
         <button>
           <img
-            class="login_icon"
+            class="icon"
             src="https://www.nicepng.com/png/full/138-1387674_png-file-svg-user-login-icon-png.png"
             alt=""
           />
-          &nbsp;Log In
+          <t>&nbsp;Log In</t>
         </button>
       </router-link>
-
+      <!--logout button-->
       <router-link :to="{ name: 'logout' }" v-if="$store.state.token != ''">
         <button>
           <img
-            class="logout_icon"
+            class="icon"
             src="https://www.pngfind.com/pngs/m/339-3396821_png-file-svg-download-icon-logout-transparent-png.png"
             alt=""
           />
-          &nbsp; Logout
+          <t>&nbsp; Logout</t>
         </button>
       </router-link>
-
+      <!--signed-in user greeting-->
       <a v-if="$store.state.user.username">
         &nbsp;Welcome, {{ $store.state.user.username }}
       </a>
@@ -61,6 +62,7 @@ import eventTagsService from "@/services/EventTagsService.js";
 
 export default {
   created() {
+    //get imported list of events
     eventsService
       .getEvents()
       .then((response) => {
@@ -69,6 +71,7 @@ export default {
       .catch((error) => {
         console.log(error.response.data.status);
       });
+    //get imported list of tags
     eventTagsService
       .getEventTags()
       .then((response) => {
@@ -82,29 +85,25 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: #f3dfa2;
-}
-
-* {
-  font-family: Verdana, Helvetica, sans-serif;
-}
-
+/*universal styling*/
+body { background-color: #F3DFA2 }
+* { font-family: Verdana, Helvetica, sans-serif }
 a {
   text-decoration: none;
   color: #000000;
 }
-
-.home_icon {
-  height: 20px;
-  width: 20px;
+/*button styling: text*/
+button{
+  display: inline-block;
+  width: 120px;
+  text-align: center;
+  background-color: #EFE6DD;
+  border-radius: 8px;
 }
-.login_icon {
-  height: 20px;
-  width: 20px;
+.icon {
+  height: 25px;
+  width: 25px;
 }
-.logout_icon {
-  height: 20px;
-  width: 20px;
-}
+t { font-size: large; }
 </style>
+

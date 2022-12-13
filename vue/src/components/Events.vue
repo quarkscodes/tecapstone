@@ -1,10 +1,12 @@
 <template>
   <div>
+    <!--link to details view-->
     <router-link
-      v-bind:to="{ name: 'details', params: { id: event.eventId } }"
+      :to="{ name: 'details', params: { id: event.eventId } }"
       v-for="event in filteredEvents"
       :key="event.eventId"
     >
+      <!--event cards-->
       <div class="event_card">
         <p class="event" id="event_title">{{ event.name }}</p>
         <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
@@ -14,21 +16,84 @@
         </p>
         <div id="event_tag_list">
           <div v-for="(event_tag, index) in eventTagsList" :key="index">
-            <p class="event" id="event_tag" v-if="event_tag.eventId == event.eventId">
+            <p
+              class="event"
+              id="event_tag"
+              v-if="event_tag.eventId == event.eventId"
+            >
               {{ event_tag.tag }}
             </p>
           </div>
         </div>
       </div>
     </router-link>
+
+    <div v-if="deleting" class="popup">
+      Are you sure you want to delete this event?
+      <button @:click="deleteEvent(eventId)" class="popupInfo">Yes</button>
+      <button @:click="notSure" class="popupInfo">Cancel</button>
+    </div>
+
+    <div v-for="event in yourEvents" :key="event.eventId">
+      <router-link
+        :to="{ name: 'details', params: { id: event.eventId } }"
+      >
+        <div class="event_card">
+          <p class="event" id="event_title">{{ event.name }}</p>
+          <img
+            class="event"
+            id="event_image"
+            :src="event.imgUrl"
+            alt="idk fam"
+          />
+          <p class="event" id="event_dates">
+            <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
+            <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
+          </p>
+          <div id="event_tag_list">
+            <div v-for="(event_tag, index) in eventTagsList" :key="index">
+              <p
+                class="event"
+                id="event_tag"
+                v-if="event_tag.eventId == event.eventId"
+              >
+                {{ event_tag.tag }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </router-link>
+      <button v-on:click="areYouSure(event.eventId)">Delete Event</button>
+    </div>
   </div>
 </template>
 
 <script>
+import EventsService from "../services/EventsService"
 export default {
   name: "Events",
-  props: ["filteredEvents", "eventTags"], //this is the new list to show
+  data() {
+    return {
+      deleting: false,
+      eventId:null,
+    };
+  },
+  props: ["filteredEvents", "eventTags", "yourEvents"], //this is the new list to show
   methods: {
+    deleteEvent(id){
+    this.deleting = false;
+    EventsService.deleteEvent(id);
+    },
+    areYouSure(id) {
+      console.log(id)
+      this.deleting = true;
+      this.eventId=id;
+    },
+        notSure() {
+      this.deleting = false;
+            this.eventId=null;
+
+    },
     DateOnly(date) {
       let text = date.split(" ");
       return text[0];
@@ -88,7 +153,7 @@ export default {
   border-radius: 12px;
 }
 
-#event_tag_list{
+#event_tag_list {
   grid-area: tag;
   display: flex;
 }
@@ -103,5 +168,16 @@ export default {
   border-radius: 6px;
   margin-left: 4px;
   margin-right: 4px;
+}
+.popup {
+  height:300px;
+  position: fixed;
+  top: 40%;
+  width: 75%;
+  text-align: center;
+  background-color: cornsilk;
+}
+
+.popup .popupInfo{
 }
 </style>

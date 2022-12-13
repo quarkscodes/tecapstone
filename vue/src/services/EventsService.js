@@ -11,6 +11,6 @@ export default {
     return axios.put('/events', event);
   },
   deleteEvent(eventId) {
-    return axios.delete('/events', eventId);
+    return axios.delete('/events/' + eventId);
   }
 }
