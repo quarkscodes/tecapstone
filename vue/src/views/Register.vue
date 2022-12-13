@@ -5,79 +5,84 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <label for="username" class="sr-only">Username</label>
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      />
-      <label for="organization" class="sr-only">Organization</label>
-      <input
-        type="text"
-        id="organization"
-        class="form-control"
-        placeholder="Organization"
-        v-model="user.organization"
-        required
-      />
-      <label for="location" class="sr-only">Location</label>
-      <input
-        type="text"
-        id="location"
-        class="form-control"
-        placeholder="Location"
-        v-model="user.location"
-        required
-      />
-      <label for="name" class="sr-only">Name</label>
-      <input
-        type="text"
-        id="name"
-        class="form-control"
-        placeholder="Name"
-        v-model="user.name"
-        required
-      />
-      <label for="phone" class="sr-only">Phone</label>
-      <input
-        type="text"
-        id="phone"
-        class="form-control"
-        placeholder="Phone"
-        v-model="user.phone"
-        required
-      />
-      <label for="email" class="sr-only">Email</label>
-      <input
-        type="text"
-        id="email"
-        class="form-control"
-        placeholder="Email"
-        v-model="user.email"
-        required
-      />
-      <label for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      />
-      <input
-        type="password"
-        id="confirmPassword"
-        class="form-control"
-        placeholder="Confirm Password"
-        v-model="user.confirmPassword"
-        required
-      />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
+
+      <div class="inputs">
+        <label for="username" class="sr-only">
+          <h3>Username</h3></label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Username"
+          v-model="user.username"
+          required
+          autofocus
+        />
+        <label for="organization" class="sr-only"><h3>Organization</h3></label>
+        <input
+          type="text"
+          id="organization"
+          class="form-control"
+          placeholder="Organization"
+          v-model="user.organization"
+          required
+        />
+        <label for="location" class="sr-only"><h3>Location</h3></label>
+        <input
+          type="text"
+          id="location"
+          class="form-control"
+          placeholder="Location"
+          v-model="user.location"
+          required
+        />
+        <label for="name" class="sr-only"><h3>Name</h3></label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          placeholder="Name"
+          v-model="user.name"
+          required
+        />
+        <label for="phone" class="sr-only"><h3>Phone</h3></label>
+        <input
+          type="text"
+          id="phone"
+          class="form-control"
+          placeholder="Phone"
+          v-model="user.phone"
+          required
+        />
+        <label for="email" class="sr-only"><h3>Email</h3></label>
+        <input
+          type="text"
+          id="email"
+          class="form-control"
+          placeholder="Email"
+          v-model="user.email"
+          required
+        />
+        <label for="password" class="sr-only"><h3>Password</h3></label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Password"
+          v-model="user.password"
+          required
+        />
+        <input
+          type="password"
+          id="confirmPassword"
+          class="form-control"
+          placeholder="Confirm Password"
+          v-model="user.confirmPassword"
+          required
+        />
+      </div>
+
+      <button><router-link :to="{ name: 'login' }">Have an account?</router-link></button>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
@@ -94,6 +99,11 @@ export default {
     return {
       user: {
         username: "",
+        organization:"",
+        location:"",
+        name:"",
+        phone:"",
+        email:"",
         password: "",
         confirmPassword: "",
         role: "admin",
@@ -135,4 +145,20 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.inputs {
+  display: grid;
+  padding-bottom: 10px;
+  row-gap: 10px;
+  width: 75%;
+  grid-template-areas:
+    ""
+    ""
+    ""
+    ""
+    ""
+    ""
+    ""
+    "";
+}
+</style>
