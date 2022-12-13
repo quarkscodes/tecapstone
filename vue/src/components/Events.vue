@@ -35,9 +35,7 @@
     </div>
 
     <div v-for="event in yourEvents" :key="event.eventId">
-      <router-link
-        :to="{ name: 'details', params: { id: event.eventId } }"
-      >
+      <router-link :to="{ name: 'details', params: { id: event.eventId } }">
         <div class="event_card">
           <p class="event" id="event_title">{{ event.name }}</p>
           <img
@@ -63,41 +61,40 @@
           </div>
         </div>
       </router-link>
-      <button v-on:click="areYouSure(event.eventId)">Delete Event</button>
+      <button @click="areYouSure(event.eventId)">Delete Event</button>
     </div>
   </div>
 </template>
 
 <script>
-import EventsService from "../services/EventsService"
+import EventsService from "../services/EventsService";
 export default {
   name: "Events",
   data() {
     return {
       deleting: false,
-      eventId:null,
+      eventId: null,
     };
   },
   props: ["filteredEvents", "eventTags", "yourEvents"], //this is the new list to show
   methods: {
-    deleteEvent(id){
-            console.log('bruh')
-      console.log(id)
-                  console.log('dude')
-            console.log(EventsService)
+    deleteEvent(id) {
+      console.log("bruh");
+      console.log(id);
+      console.log("dude");
+      console.log(EventsService);
 
-    this.deleting = false;
-    EventsService.deleteEvent(id);
+      this.deleting = false;
+      EventsService.deleteEvent(id);
     },
     areYouSure(id) {
-      console.log(id)
+      console.log(id);
       this.deleting = true;
-      this.eventId=id;
+      this.eventId = id;
     },
-        notSure() {
+    notSure() {
       this.deleting = false;
-            this.eventId=null;
-
+      this.eventId = null;
     },
     DateOnly(date) {
       let text = date.split(" ");
@@ -175,7 +172,7 @@ export default {
   margin-right: 4px;
 }
 .popup {
-  height:300px;
+  height: 300px;
   position: fixed;
   top: 40%;
   width: 75%;
