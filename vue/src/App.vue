@@ -3,7 +3,7 @@
     <div id="nav">
       <!--home button-->
       <router-link :to="{ name: 'home' }">
-        <button>
+        <button id="b_head">
           <img
             class="icon"
             src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
@@ -15,7 +15,7 @@
       <!--admin menu button-->
       <router-link :to="{ name: 'administration' }" v-if="$store.state.token != ''">
         &nbsp;
-        <button>
+        <button id="b_head">
           <img
             class="icon"
             src="http://cdn.onlinewebfonts.com/svg/img_184513.png"
@@ -27,7 +27,7 @@
       &nbsp;
       <!--login button-->
       <router-link :to="{ name: 'login' }" v-if="$store.state.token == ''">
-        <button>
+        <button id="b_head">
           <img
             class="icon"
             src="https://www.nicepng.com/png/full/138-1387674_png-file-svg-user-login-icon-png.png"
@@ -38,7 +38,7 @@
       </router-link>
       <!--logout button-->
       <router-link :to="{ name: 'logout' }" v-if="$store.state.token != ''">
-        <button>
+        <button id="b_head">
           <img
             class="icon"
             src="https://www.pngfind.com/pngs/m/339-3396821_png-file-svg-download-icon-logout-transparent-png.png"
@@ -95,9 +95,11 @@ a {
 /*button styling: text*/
 button{
   display: inline-block;
-  width: 120px;
   text-align: center;
   background-color: #FFFAFA;
+}
+#b_head{
+  width: 120px;
   border-radius: 8px;
 }
 .icon {

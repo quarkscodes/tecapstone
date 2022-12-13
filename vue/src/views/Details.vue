@@ -6,9 +6,6 @@
       <b>Start Date:</b> {{ event.startTime }}
     </p>
     <p class="details" id="details_end"><b>End Date:</b> {{ event.endTime }}</p>
-    <p class="details" id="details_duration">
-      <b>Duration:</b> duration goes here
-    </p>
     <div id="details_tag_list">
       <div v-for="(event_tag, index) in eventTagsList" :key="index">
         <p id="details_tag" v-if="event_tag.eventId == event.eventId">
@@ -70,7 +67,6 @@ export default {
     "tag img"
     "start img"
     "end img"
-    "duration img"
     "location img"
     "desc desc";
   background-color: #efe6dd;

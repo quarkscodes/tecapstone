@@ -63,11 +63,16 @@
       </router-link>
       <button @click="areYouSure(event.eventId)">Delete Event</button>
     </div>
+
+    <div v-for="item in filteredEventsET" :key="item.name">
+      <p>{{ item.name }}</p>
+    </div>
   </div>
 </template>
 
 <script>
 import EventsService from "../services/EventsService";
+
 export default {
   name: "Events",
   data() {
@@ -76,7 +81,7 @@ export default {
       eventId: null,
     };
   },
-  props: ["filteredEvents", "eventTags", "yourEvents"], //this is the new list to show
+  props: ["filteredEvents", "eventTags", "yourEvents", "filteredEventsET"], //this is the new list to show
   methods: {
     deleteEvent(id) {
       console.log("bruh");

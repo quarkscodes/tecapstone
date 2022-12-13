@@ -26,10 +26,10 @@ CREATE TABLE users (
 
 --populate default data
 
--- Robert/password
+-- user/password
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','admin');
 
---Nancy/password
+--admin/password
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
 GO
@@ -69,7 +69,7 @@ VALUES ('USA Fit Pflugerville Resolution Race',
 
 GO
 
-CREATE TABLE tags (
+/*CREATE TABLE tags (
 	name varchar(50) NOT NULL,
 
 	CONSTRAINT PK_tag PRIMARY KEY (name)
@@ -84,11 +84,11 @@ INSERT INTO tags (name) VALUES ('health');
 INSERT INTO tags (name) VALUES ('education');
 INSERT INTO tags (name) VALUES ('childcare');
 
-GO
+GO*/
 
 CREATE TABLE event_tags (
 	event_id int FOREIGN KEY REFERENCES events(event_id),
-	tag_name varchar(50) FOREIGN KEY REFERENCES tags(name),
+	tag_name varchar(50) /*FOREIGN KEY REFERENCES tags(name)*/,
 
 	CONSTRAINT PK_event_tags PRIMARY KEY (tag_name, event_id)
 )
