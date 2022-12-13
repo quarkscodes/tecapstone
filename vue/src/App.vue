@@ -9,7 +9,7 @@
             src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
             alt=""
           />
-          <t>&nbsp;Home</t>
+          <div>&nbsp;Home</div>
         </button>
       </router-link>
       <!--admin menu button-->
@@ -21,7 +21,7 @@
             src="http://cdn.onlinewebfonts.com/svg/img_184513.png"
             alt=""
           />
-          <t>&nbsp;Menu</t>
+          <div>&nbsp;Menu</div>
         </button>
       </router-link>
       &nbsp;
@@ -33,7 +33,7 @@
             src="https://www.nicepng.com/png/full/138-1387674_png-file-svg-user-login-icon-png.png"
             alt=""
           />
-          <t>&nbsp;Log In</t>
+          <div>&nbsp;Log In</div>
         </button>
       </router-link>
       <!--logout button-->
@@ -44,7 +44,7 @@
             src="https://www.pngfind.com/pngs/m/339-3396821_png-file-svg-download-icon-logout-transparent-png.png"
             alt=""
           />
-          <t>&nbsp; Logout</t>
+          <div>&nbsp; Logout</div>
         </button>
       </router-link>
       <!--signed-in user greeting-->
@@ -104,6 +104,6 @@ button{
   height: 25px;
   width: 25px;
 }
-t { font-size: large; }
+button > div { font-size: large; }
 </style>
 
