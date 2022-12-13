@@ -30,8 +30,8 @@
 
     <div v-if="deleting" class="popup">
       Are you sure you want to delete this event?
-      <button @:click="deleteEvent(eventId)" class="popupInfo">Yes</button>
-      <button @:click="notSure" class="popupInfo">Cancel</button>
+      <button v-on:click="deleteEvent(eventId)" class="popupInfo">Yes</button>
+      <button v-on:click="notSure" class="popupInfo">Cancel</button>
     </div>
 
     <div v-for="event in yourEvents" :key="event.eventId">
@@ -81,6 +81,11 @@ export default {
   props: ["filteredEvents", "eventTags", "yourEvents"], //this is the new list to show
   methods: {
     deleteEvent(id){
+            console.log('bruh')
+      console.log(id)
+                  console.log('dude')
+            console.log(EventsService)
+
     this.deleting = false;
     EventsService.deleteEvent(id);
     },
@@ -176,8 +181,5 @@ export default {
   width: 75%;
   text-align: center;
   background-color: cornsilk;
-}
-
-.popup .popupInfo{
 }
 </style>
