@@ -20,17 +20,22 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL,
 	password_hash varchar(200) NOT NULL,
 	salt varchar(200) NOT NULL,
-	user_role varchar(50) NOT NULL
+	user_role varchar(50) NOT NULL,
+	organization varchar(100) NOT NULL,
+	location varchar(100) NOT NULL,
+	name varchar (100) NOT NULL,
+	phone varchar (50) NOT NULL,
+    email varchar (100) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 )
 
 --populate default data
 
 -- user/password
-INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','admin');
+INSERT INTO users (username, password_hash, salt, user_role, organization, location, name, phone, email) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','admin', 'company', '12345 road street', 'Guy Person', '5558675309', 'email@email.com');
 
 --admin/password
-INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
+INSERT INTO users (username, password_hash, salt, user_role, organization, location, name, phone, email) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin', 'charity', '678910 street road', 'Person Mann', '5555555555', 'realmail@fakeemail.com');
 
 GO
 
