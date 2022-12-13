@@ -86,7 +86,7 @@ export default {
 
 <style>
 /*universal styling*/
-body { background-color: #F3DFA2 }
+body { background-color: #EFE6DD }
 * { font-family: Verdana, Helvetica, sans-serif }
 a {
   text-decoration: none;
@@ -97,7 +97,7 @@ button{
   display: inline-block;
   width: 120px;
   text-align: center;
-  background-color: #EFE6DD;
+  background-color: #FFFAFA;
   border-radius: 8px;
 }
 .icon {

@@ -61,7 +61,7 @@
           </div>
         </div>
       </router-link>
-      <button v-on:click="areYouSure(event.eventId)">Delete Event</button>
+      <button @click="areYouSure(event.eventId)">Delete Event</button>
     </div>
   </div>
 </template>
