@@ -19,7 +19,8 @@ namespace Capstone.DAO
         private readonly string sqlAddUser = "INSERT INTO users (username, password_hash, salt, user_role, organization, location, name, phone, email) " +
             "VALUES(@username, @password_hash, @salt, @user_role, @organization, @location, @name, @phone, @email)";
 
-
+        private readonly string sqlUpdateUser =
+            "UPDATE users SET organization = @organization, name = @name, location = @location, phone = @phone, email = @email WHERE username = @username;";
 
 
         public UserSqlDao(string dbConnectionString)
@@ -87,6 +88,21 @@ namespace Capstone.DAO
             cmd.ExecuteNonQuery();
 
             return GetUser(user.Username);
+        }
+
+        public bool UpdateUser(User user)
+        {
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(sqlUpdateUser, conn);
+            cmd.Parameters.AddWithValue("@organization", user.Organization);
+            cmd.Parameters.AddWithValue("@location", user.Location);
+            cmd.Parameters.AddWithValue("@name", user.Name);
+            cmd.Parameters.AddWithValue("@phone", user.Phone);
+            cmd.Parameters.AddWithValue("@email", user.Email);
+            cmd.Parameters.AddWithValue("@username", user.Username);
+            return cmd.ExecuteNonQuery() > 0;
         }
 
         private User GetUserFromReader(SqlDataReader reader)
