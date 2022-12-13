@@ -1,21 +1,8 @@
 ****Template****
 
-White: EFE6DD
+Snow-White: FFFAFA
+Off-White: EFE6DD
 Yellow: F3DFA2
 Blue: 7EBDC2
 Red: BB4430
 Black: 231F20
-
-****Second Go****
-White: FFFFFF
-Light Grey: E5E5E5
-Dandelion: FCA311
-Navy: 14213D
-Black: 000000
-
-****4 light****
-Offwhite: F7FFF7
-Yellow: FFE66D
-Coral: FF6B6B
-Turquoise: 4ECDC4
-Forest: 1A535C
