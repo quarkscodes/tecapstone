@@ -6,6 +6,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
+import Profile from '../views/Profile.vue'
 import NotFound from '@/views/NotFound.vue'
 import Details from '../views/Details.vue'
 import Administration from '@/views/Administration.vue'
@@ -42,6 +43,14 @@ const router = new Router({
       component: Administration,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: '/administration/profile',
+      name: 'profile',
+      component: Profile,
+      meta: {
+        requiresAuth: false
       }
     },
     {

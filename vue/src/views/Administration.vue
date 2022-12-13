@@ -1,6 +1,6 @@
 <template>
     <div class="admin">
-      <router-link :to="{ name: 'viewProfile' }">
+      <router-link :to="{ name: 'profile' }">
         <button id="option">
           View Profile
         </button>
