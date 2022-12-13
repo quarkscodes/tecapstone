@@ -1,5 +1,5 @@
 <template>
-<!-- EDIT TO BE FOR UPDATE -->
+  <!-- EDIT TO BE FOR UPDATE -->
   <div id="update" class="text-center">
     <form class="form-update" @submit.prevent="update">
       <h1 class="h3 mb-3 font-weight-normal">Update Account</h1>
@@ -8,8 +8,7 @@
       </div>
 
       <div class="inputs">
-        <label for="username" class="sr-only">
-          <h3>Username</h3></label>
+        <label for="username" class="sr-only"> <h3>Username</h3></label>
         <input
           type="text"
           id="username"
@@ -111,6 +110,12 @@ export default {
       updateErrors: false,
       updateErrorMsg: "There were problems updating this user.",
     };
+  },
+    computed: {
+        getObject(){
+            let item = authService.get(this.$store.state.user.username)
+            console.log(item)
+            return item}
   },
   methods: {
     update() {
