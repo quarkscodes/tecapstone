@@ -31,23 +31,16 @@ namespace Capstone.DAO
         {
             User returnUser = null;
 
-            try
-            {
-                using SqlConnection conn = new SqlConnection(connectionString);
-                conn.Open();
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
 
-                SqlCommand cmd = new SqlCommand(sqlGetUser, conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                SqlDataReader reader = cmd.ExecuteReader();
+            SqlCommand cmd = new SqlCommand(sqlGetUser, conn);
+            cmd.Parameters.AddWithValue("@username", username);
+            SqlDataReader reader = cmd.ExecuteReader();
 
-                if (reader.Read())
-                {
-                    returnUser = GetUserFromReader(reader);
-                }
-            }
-            catch (SqlException)
+            if (reader.Read())
             {
-                throw;
+                returnUser = GetUserFromReader(reader);
             }
 
             return returnUser;
@@ -57,24 +50,17 @@ namespace Capstone.DAO
         {
             List<User> returnUsers = new List<User>();
 
-            try
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(sqlGetUsers, conn);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
             {
-                using SqlConnection conn = new SqlConnection(connectionString);
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(sqlGetUsers, conn);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    User temp = GetUserFromReader(reader);
-                    returnUsers.Add(temp);
-                }
-            }
-            catch (SqlException)
-            {
-                throw;
+                User temp = GetUserFromReader(reader);
+                returnUsers.Add(temp);
             }
 
             return returnUsers;
@@ -85,22 +71,15 @@ namespace Capstone.DAO
             IPasswordHasher passwordHasher = new PasswordHasher();
             PasswordHash hash = passwordHasher.ComputeHash(password);
 
-            try
-            {
-                using SqlConnection conn = new SqlConnection(connectionString);
-                conn.Open();
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
 
-                SqlCommand cmd = new SqlCommand(sqlAddUser, conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password_hash", hash.Password);
-                cmd.Parameters.AddWithValue("@salt", hash.Salt);
-                cmd.Parameters.AddWithValue("@user_role", role);
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
+            SqlCommand cmd = new SqlCommand(sqlAddUser, conn);
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@password_hash", hash.Password);
+            cmd.Parameters.AddWithValue("@salt", hash.Salt);
+            cmd.Parameters.AddWithValue("@user_role", role);
+            cmd.ExecuteNonQuery();
 
             return GetUser(username);
         }

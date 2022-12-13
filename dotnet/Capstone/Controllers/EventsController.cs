@@ -37,7 +37,7 @@ namespace Capstone.Controllers
                 return BadRequest("Database not responding");
             }
         }
-        [HttpPost()]
+        [HttpPost]
         public IActionResult AddEvent(Event e)
         {
                 bool added = eventsDao.AddEvent(e);

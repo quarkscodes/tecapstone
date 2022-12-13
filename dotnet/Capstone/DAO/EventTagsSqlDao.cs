@@ -20,24 +20,17 @@ namespace Capstone.DAO
         {
             List<EventTag> returnEventTags = new List<EventTag>();
 
-            try
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(sqlGetEventTags, conn);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
             {
-                using SqlConnection conn = new SqlConnection(connectionString);
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(sqlGetEventTags, conn);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    EventTag temp = GetEventTagFromReader(reader);
-                    returnEventTags.Add(temp);
-                }
-            }
-            catch (SqlException)
-            {
-                throw;
+                EventTag temp = GetEventTagFromReader(reader);
+                returnEventTags.Add(temp);
             }
 
             return returnEventTags;
