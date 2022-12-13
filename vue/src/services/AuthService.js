@@ -10,7 +10,7 @@ export default {
     return axios.post('/register', user)
   },
 
-  get(username) {
-    return axios.get('/login', username);
+  get(name) {
+    return axios.get('/login'+'/'+name);
   }
 }
