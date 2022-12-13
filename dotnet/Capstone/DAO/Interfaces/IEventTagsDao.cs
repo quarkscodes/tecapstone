@@ -10,7 +10,7 @@ namespace Capstone.DAO
     {
         List<EventTag> GetEventTags();
         bool DeleteEventTag(EventTag tag);
-        bool DeleteTagByEventId(int eventId);
+        bool DeleteByEventId(int eventId);
         bool AddEventTag(EventTag tag);
     }
 }

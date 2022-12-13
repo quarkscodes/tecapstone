@@ -16,10 +16,11 @@ namespace Capstone.DAO
 
         private readonly string sqlGetUsers = "SELECT user_id, username, password_hash, salt, user_role FROM users; ";
 
-        private readonly string sqlAddUser = "INSERT INTO users (username, password_hash, salt, user_role) " +
-            "VALUES(@username, @password_hash, @salt, @user_role)";
+        private readonly string sqlAddUser = "INSERT INTO users (username, password_hash, salt, user_role, organization, location, name, phone, email) " +
+            "VALUES(@username, @password_hash, @salt, @user_role, @organization, @location, @name, @phone, @email)";
 
-
+        private readonly string sqlUpdateUser =
+            "UPDATE users SET organization = @organization, name = @name, location = @location, phone = @phone, email = @email WHERE username = @username;";
 
 
         public UserSqlDao(string dbConnectionString)
@@ -66,22 +67,42 @@ namespace Capstone.DAO
             return returnUsers;
         }
 
-        public User AddUser(string username, string password, string role)
+        public User AddUser(RegisterUser user)
         {
             IPasswordHasher passwordHasher = new PasswordHasher();
-            PasswordHash hash = passwordHasher.ComputeHash(password);
+            PasswordHash hash = passwordHasher.ComputeHash(user.Password);
 
             using SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
 
             SqlCommand cmd = new SqlCommand(sqlAddUser, conn);
-            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@username", user.Username);
             cmd.Parameters.AddWithValue("@password_hash", hash.Password);
             cmd.Parameters.AddWithValue("@salt", hash.Salt);
-            cmd.Parameters.AddWithValue("@user_role", role);
+            cmd.Parameters.AddWithValue("@user_role", user.Role);
+            cmd.Parameters.AddWithValue("@organization", user.Organization);
+            cmd.Parameters.AddWithValue("@location", user.Location);
+            cmd.Parameters.AddWithValue("@name", user.Name);
+            cmd.Parameters.AddWithValue("@phone", user.Phone);
+            cmd.Parameters.AddWithValue("@email", user.Email);
             cmd.ExecuteNonQuery();
 
-            return GetUser(username);
+            return GetUser(user.Username);
+        }
+
+        public bool UpdateUser(User user)
+        {
+            using SqlConnection conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(sqlUpdateUser, conn);
+            cmd.Parameters.AddWithValue("@organization", user.Organization);
+            cmd.Parameters.AddWithValue("@location", user.Location);
+            cmd.Parameters.AddWithValue("@name", user.Name);
+            cmd.Parameters.AddWithValue("@phone", user.Phone);
+            cmd.Parameters.AddWithValue("@email", user.Email);
+            cmd.Parameters.AddWithValue("@username", user.Username);
+            return cmd.ExecuteNonQuery() > 0;
         }
 
         private User GetUserFromReader(SqlDataReader reader)

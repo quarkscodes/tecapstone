@@ -51,11 +51,10 @@ namespace Capstone.DAO
             cmd.Parameters.AddWithValue("@event_id", tag.EventId);
             cmd.Parameters.AddWithValue("@tag_name", tag.Tag);
 
-            int rowsAffected = cmd.ExecuteNonQuery();
-            return rowsAffected > 0;
+            return cmd.ExecuteNonQuery() > 0;
         }
 
-        public bool DeleteTagByEventId(int eventId)
+        public bool DeleteByEventId(int eventId)
         {
             using SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();

@@ -1,14 +1,14 @@
 <template>
-  <div id="register" class="text-center">
-    <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-      <div class="alert alert-danger" role="alert" v-if="registrationErrors">
-        {{ registrationErrorMsg }}
+  <!-- EDIT TO BE FOR UPDATE -->
+  <div id="update" class="text-center">
+    <form class="form-update" @submit.prevent="update">
+      <h1 class="h3 mb-3 font-weight-normal">Update Account</h1>
+      <div class="alert alert-danger" role="alert" v-if="updateErrors">
+        {{ updateErrorMsg }}
       </div>
 
       <div class="inputs">
-        <label for="username" class="sr-only">
-          <h3>Username</h3></label>
+        <label for="username" class="sr-only"> <h3>Username</h3></label>
         <input
           type="text"
           id="username"
@@ -82,9 +82,8 @@
         />
       </div>
 
-      <button><router-link :to="{ name: 'login' }">Have an account?</router-link></button>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Create Account
+        Update Account
       </button>
     </form>
   </div>
@@ -94,7 +93,7 @@
 import authService from "../services/AuthService";
 
 export default {
-  name: "register",
+  name: "profile",
   data() {
     return {
       user: {
@@ -108,38 +107,42 @@ export default {
         confirmPassword: "",
         role: "admin",
       },
-      registrationErrors: false,
-      registrationErrorMsg: "There were problems registering this user.",
+      updateErrors: false,
+      updateErrorMsg: "There were problems updating this user.",
     };
   },
+    created() {
+        let name = this.$store.state.user.username
+            this.user = authService.get(name)
+  },
   methods: {
-    register() {
+    update() {
       if (this.user.password != this.user.confirmPassword) {
-        this.registrationErrors = true;
-        this.registrationErrorMsg = "Password & Confirm Password do not match.";
+        this.updateErrors = true;
+        this.updateErrorMsg = "Password & Confirm Password do not match.";
       } else {
         authService
-          .register(this.user)
+          .update(this.user)
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
                 path: "/login",
-                query: { registration: "success" },
+                query: { update: "success" },
               });
             }
           })
           .catch((error) => {
             const response = error.response;
-            this.registrationErrors = true;
+            this.updateErrors = true;
             if (response.status === 400) {
-              this.registrationErrorMsg = "Bad Request: Validation Errors";
+              this.updateErrorMsg = "Bad Request: Validation Errors";
             }
           });
       }
     },
     clearErrors() {
-      this.registrationErrors = false;
-      this.registrationErrorMsg = "There were problems registering this user.";
+      this.updateErrors = false;
+      this.updateErrorMsg = "There were problems updating this user.";
     },
   },
 };

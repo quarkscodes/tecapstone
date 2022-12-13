@@ -24,7 +24,7 @@ namespace Capstone.Controllers
         }
 
         //todo reroute
-        [HttpGet()]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Ready()
         {
@@ -38,6 +38,13 @@ namespace Capstone.Controllers
             {
                 return BadRequest("Database not responding");
             }
+        }
+
+        [HttpGet("/get")]
+        [AllowAnonymous]
+        public User GetUser(string username)
+        {
+            return userDao.GetUser(username);
         }
 
         [HttpPost]
@@ -78,7 +85,7 @@ namespace Capstone.Controllers
                 return Conflict(new { message = "Username already taken. Please choose a different username." });
             }
 
-            User user = userDao.AddUser(userParam.Username, userParam.Password, userParam.Role);
+            User user = userDao.AddUser(userParam);
             if (user != null)
             {
                 result = Created(user.Username, null); //values aren't read on client
@@ -89,6 +96,28 @@ namespace Capstone.Controllers
             }
 
             return result;
+        }
+
+        [HttpPut]
+        public IActionResult UpdateUser(User user)
+        {
+            if (user.Username == userDao.GetUser(User.Identity.Name).Username)
+            {
+                bool updated = userDao.UpdateUser(user);
+
+                if (updated)
+                {
+                    return Ok(user);
+                }
+                else
+                {
+                    return BadRequest("Database not responding");
+                }
+            }
+            else
+            {
+                return Unauthorized("Not Authorized");
+            }
         }
     }
 }

@@ -79,7 +79,7 @@ namespace Capstone.Controllers
         {
             if (eventsDao.GetEvent(eventId).UserId == userDao.GetUser(User.Identity.Name).UserId)
             {
-                eventTagsDao.DeleteTagByEventId(eventId);
+                eventTagsDao.DeleteByEventId(eventId);
 
                 bool deleted = eventsDao.DeleteEvent(eventId);
 
