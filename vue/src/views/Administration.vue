@@ -26,6 +26,11 @@
           Delete Event
         </button>
       </router-link>
+      <router-link :to="{ name: 'register' }">
+        <button id="option">
+          Register New Admin
+        </button>
+      </router-link>
     </div>
 </template>
 
