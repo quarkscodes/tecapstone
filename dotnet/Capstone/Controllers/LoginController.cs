@@ -95,11 +95,9 @@ namespace Capstone.Controllers
             return result;
         }
 
-        [HttpPut]
-        public IActionResult UpdateUser(User user)
+        [HttpPut("/update")]
+        public IActionResult UpdateUser(RegisterUser user)
         {
-            if (user.Username == userDao.GetUser(User.Identity.Name).Username)
-            {
                 bool updated = userDao.UpdateUser(user);
 
                 if (updated)
@@ -110,11 +108,6 @@ namespace Capstone.Controllers
                 {
                     return BadRequest("Database not responding");
                 }
-            }
-            else
-            {
-                return Unauthorized("Not Authorized");
-            }
         }
     }
 }
