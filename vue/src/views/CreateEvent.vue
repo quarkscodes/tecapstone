@@ -1,6 +1,9 @@
 <template>
   <div>
     <form class="create" v-on:submit.prevent="submitCreate">
+      <div id="create_head">
+        <p id="create_head_content">Create Event</p>
+      </div>
       <div id="create">
         <label for="name">Event Name:<br /></label>
         <input type="text" id="name" v-model="newEvent.name" required />
@@ -10,7 +13,6 @@
         <textarea
           type="textarea"
           id="description"
-          rows="3"
           v-model="newEvent.description"
           required
         />
@@ -47,7 +49,9 @@
         <label for="zip">Zip:<br /></label>
         <input type="number" id="zip" v-model="newEvent.zip" />
       </div>
-      <button type="submit" id="submit">Submit</button>
+      <div id="submit_create">
+        <button type="submit" id="submit_create_button">Submit</button>
+      </div>
     </form>
   </div>
 </template>
@@ -71,6 +75,7 @@ export default {
         .createEvent(this.newEvent)
         .then((response) => {
           if (response.status == 200) {
+            alert("Success: created an event");
             eventsService
               .getEvents()
               .then((response) => {
@@ -84,6 +89,7 @@ export default {
         })
         .catch((error) => {
           console.log(error.response.data.status);
+          alert("Unable to create event, try again");
         });
     },
   },
@@ -94,6 +100,7 @@ export default {
 .create {
   display: flexbox;
   justify-content: center;
+  align-items: center;
   background: #7ebdc2;
   padding: 5%;
   margin: 32px 15%;
@@ -105,8 +112,21 @@ div #create {
   margin: 4px;
   border-radius: 4px;
 }
+div #create_head {
+  background: #efe6dd;
+  border: 2px solid black;
+  padding: 2px;
+  margin: 4px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+#create_head_content {
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+}
 #create input {
-  width: 95%;
+  width: 98%;
 }
 .create button {
   margin: 8px;
@@ -115,7 +135,14 @@ div #create {
 }
 #description {
   height: 85px;
-  width: 95%;
+  width: 98%;
   resize: none;
+}
+#submit_create {
+  text-align: center;
+}
+#submit_create_button {
+  width: 60%;
+  font-size: larger;
 }
 </style>
