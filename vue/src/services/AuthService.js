@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-const http = axios.create({
-  baseURL: "http://localhost:8080"
-});
-
 export default {
 
   login(user) {
@@ -13,7 +9,10 @@ export default {
   register(user) {
     return axios.post('/register', user)
   },
+  update(user) {
+    return axios.put('/update', user)
+  },
   get(name) {
-    return http.get(`/login/get/`, name)
+    return axios.get('login/get/'+name)
   }
 }
