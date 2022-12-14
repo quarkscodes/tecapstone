@@ -9,7 +9,7 @@
       <!--event cards-->
       <div class="event_card">
         <p class="event" id="event_title">{{ event.name }}</p>
-        <img class="event" id="event_image" :src="event.imgUrl" alt="idk fam" />
+        <img class="event" id="event_image" :src="event.imgUrl" alt="loading..." />
         <p class="event" id="event_dates">
           <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
           <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
@@ -29,7 +29,7 @@
     </router-link>
 
     <div v-if="deleting" class="popup">
-      Are you sure you want to delete this event?
+      <p><br/>Are you sure you want to delete this event?</p>
       <button v-on:click="deleteEvent(eventId)" class="popupInfo">Yes</button>
       <button v-on:click="notSure" class="popupInfo">Cancel</button>
     </div>
@@ -42,7 +42,7 @@
             class="event"
             id="event_image"
             :src="event.imgUrl"
-            alt="idk fam"
+            alt="loading..."
           />
           <p class="event" id="event_dates">
             <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
@@ -61,7 +61,7 @@
           </div>
         </div>
       </router-link>
-      <button @click="areYouSure(event.eventId)">Delete Event</button>
+      <button id="delete_button" @click="areYouSure(event.eventId)">Delete Event</button>
     </div>
   </div>
 </template>
@@ -175,11 +175,27 @@ export default {
 
 }
 .popup {
-  height: 300px;
   position: fixed;
-  top: 40%;
-  width: 75%;
+  top: 30%;
+  height: 30%;
+  left: 30%;
+  width: 40%;
   text-align: center;
-  background-color: cornsilk;
+  background-color: #fffafa;
+  border: 2px solid black;
+}
+.popup p{
+  font-size: x-large;
+  padding: 12px;
+}
+.popup button{
+  padding: 4px;
+  margin: 8px;
+  font-size: larger;
+  width: 30%;
+}
+#delete_button{
+  width: 100%;
+  font-size: larger;
 }
 </style>
