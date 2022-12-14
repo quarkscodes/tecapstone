@@ -159,6 +159,7 @@ export default {
 #event_tag_list {
   grid-area: tag;
   display: flex;
+  flex-wrap: wrap;
 }
 
 #event_tag {
@@ -169,8 +170,9 @@ export default {
   padding-left: 8px;
   padding-right: 8px;
   border-radius: 6px;
-  margin-left: 4px;
-  margin-right: 4px;
+  margin: 4px 4px;
+  margin-bottom: 0px;
+
 }
 .popup {
   height: 300px;
