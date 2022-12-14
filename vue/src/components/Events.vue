@@ -135,7 +135,6 @@ export default {
   font-size: x-large;
   font-weight: bold;
   background-color: #efe6dd;
-  width: max;
   padding: 12px;
   border-radius: 8px;
   margin-top: 4px;
@@ -146,6 +145,7 @@ export default {
   width: 95%;
   aspect-ratio: 1/1;
   border-radius: 12px;
+  background-color: #efe6dd;
 }
 
 #event_dates {

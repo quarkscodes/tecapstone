@@ -1,0 +1,3 @@
+login button hidden when screen too small
+integrate orange color
+static filter bar

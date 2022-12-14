@@ -46,12 +46,12 @@ export default {
   border: none;
 }
 #option_straight {
-  background: #fffafa;
+  background: #fcbb70;
   width: 100%;
   padding: 12px;
-  margin: 8px 0px;
+  margin: 16px 0px;
   font-size: larger;
   font-weight: bold;
-  border: 3.5px solid black;
+  border-radius: 8px;
 }
 </style>

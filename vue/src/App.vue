@@ -58,7 +58,7 @@
       <!--signed-in user greeting-->
       <div id="signed_in_user">
         <a v-if="$store.state.user.username">
-          &nbsp;Welcome, {{ $store.state.user.username }}
+          <br/>Welcome, {{ $store.state.user.username }}
         </a>
       </div>
     </div>
@@ -125,7 +125,6 @@ a {
   grid-template-areas:
   "logo buttons"
   "logo signedin";
-  align-content: end;
 }
 #logo{
   grid-area: logo;
@@ -138,12 +137,12 @@ a {
 #nav{
   grid-area: buttons;
   display: flex;
-  align-items: center;
+  align-items: end;
 }
 #nav button{
 }
 #signed_in_user{
-  grid-area: signedin
+  grid-area: signedin;
 }
 /*button styling: text*/
 button {

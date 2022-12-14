@@ -1,7 +1,12 @@
 <template>
   <div class="event_details" v-if="event">
     <p class="details" id="details_title">{{ event.name }}</p>
-    <img class="details" id="details_image" :src="event.imgUrl" alt="loading..." />
+    <img
+      class="details"
+      id="details_image"
+      :src="event.imgUrl"
+      alt="loading..."
+    />
     <p class="details" id="details_start">
       <b>Start Date:</b> {{ event.startTime }}
     </p>
@@ -61,7 +66,7 @@ export default {
 .event_details {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  grid-column-gap: 8px;
+  grid-column-gap: 16px;
   grid-template-areas:
     "title img"
     "tag img"
@@ -69,8 +74,7 @@ export default {
     "end img"
     "location img"
     "desc desc";
-  background-color: #efe6dd;
-  border: 4px solid #7ebdc2;
+  background-color: #7ebdc2;
   margin: 16px;
   padding: 24px;
   border-radius: 12px;
@@ -78,14 +82,19 @@ export default {
 
 #details_title {
   grid-area: title;
+  background-color: #efe6dd;
   text-align: center;
   font-size: xx-large;
   font-weight: bold;
+  width: fit-content;
+  padding: 8px;
+  margin: 16px auto;
+  border-radius: 8px;
 }
 
 #details_image {
   grid-area: img;
-  border: 4px solid #7ebdc2;
+  background-color: #efe6dd;
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 12px;
@@ -95,6 +104,10 @@ export default {
   grid-area: start;
   text-align: left;
   font-size: large;
+  background-color: #efe6dd;
+  width: auto;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 #details_end {
@@ -102,13 +115,10 @@ export default {
   text-align: left;
   font-size: large;
   margin-top: 8px;
-}
-
-#details_duration {
-  grid-area: duration;
-  text-align: left;
-  font-size: large;
-  margin-top: 8px;
+  background-color: #efe6dd;
+  width: auto;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 #details_tag_list {
@@ -123,7 +133,6 @@ export default {
   grid-area: tag;
   font-size: large;
   text-align: center;
-  border: 4px solid #7ebdc2;
   padding: 4px;
   padding-left: 10px;
   padding-right: 10px;
@@ -131,6 +140,7 @@ export default {
   margin: auto;
   margin-left: 4px;
   margin-right: 4px;
+  background-color: #efe6dd;
 }
 
 #details_location {
@@ -138,6 +148,10 @@ export default {
   text-align: left;
   font-size: large;
   margin-top: 8px;
+  background-color: #efe6dd;
+  width: auto;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 #details_description {
@@ -146,6 +160,10 @@ export default {
   align-content: left;
   text-align: left;
   font-size: large;
-  margin-top: 8px;
+  margin-top: 16px;
+  background-color: #efe6dd;
+  width: auto;
+  padding: 8px;
+  border-radius: 8px;
 }
 </style>
