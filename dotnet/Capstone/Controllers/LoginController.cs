@@ -40,7 +40,7 @@ namespace Capstone.Controllers
             }
         }
 
-        [HttpGet("/get")]
+        [HttpGet("get/{username}")]
         public User GetUser(string username)
         {
             return userDao.GetUser(username);
