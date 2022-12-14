@@ -1,7 +1,7 @@
 <template>
   <div class="event_details" v-if="event">
     <p class="details" id="details_title">{{ event.name }}</p>
-    <img class="details" id="details_image" :src="event.imgUrl" alt="idk fam" />
+    <img class="details" id="details_image" :src="event.imgUrl" alt="loading..." />
     <p class="details" id="details_start">
       <b>Start Date:</b> {{ event.startTime }}
     </p>

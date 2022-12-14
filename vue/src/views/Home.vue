@@ -85,7 +85,7 @@ export default {
       });
       //filter by zipcode
       let zipFilter = listSorted.filter((e) => {
-        return e.zip.toString().includes(this.inputZip) || !this.inputZip;
+        return e.zip.toString().startsWith(this.inputZip) || !this.inputZip;
       });
       //filter by type
       let typeFilter = [];
