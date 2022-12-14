@@ -65,7 +65,11 @@ VALUES ('YMCA Hilltop', 'Welcome to the YMCA of Central Ohio. We are an inclusiv
 ('Holiday Hot Meal and Toy Giveaway', 'Free hot meal and toys to gift your children.', 'https://www.horsespiritartsgallery.com/wp-content/uploads/2022/01/Giving-Tree-EB-Event-Dec-21.jpg', '2022-12-16 17:00:00', '2022-12-16 19:00:00', 'Columbus', 'Ohio', '43206', '1100 Rhoads Ave.', 1),
 ('F3 Columbus Fitness for Men', 'F3 — our three Fs stand for Fitness, Fellowship and Faith — traces its roots to a free, participant-led boot camp workout held on Saturday mornings at a Charlotte, North Carolina park since 2006. The leaders of F3 launched their first Saturday workout on January 1, 2011 on the campus of A.G. Middle School in Charlotte.', 'https://f3columbus.files.wordpress.com/2017/08/f3cbus_circle_wht.jpg?w=300', '2022-12-19 05:30:00', '2022-12-19 06:15:00', 'Columbus', 'Ohio', 43221, '2100 Arlington Ave.', 1),
 ('The Nook Workout for Women by FiA Columbus', 'Our Mission: FiA stands for Females in Action, which is a community of women dedicated to making each other stronger in all areas of our lives through activities that include bodies, minds, and hearts. A FiA workout is a promise, always free, open to ALL women, held outdoors, and ends with a circle of trust.', 'https://fianation.com/wp-content/uploads/2021/03/Columbus.webp', '2022-12-19 06:00:00', '2022-12-19 06:45:00', 'Columbus', 'Ohio', 43221,'1880 Northam Rd', 1),
-('Santa’s Wonderland and Santa Pictures at Cabela’s and Bass Pro Shops', 'Families will get a free 4×6 studio-quality photo. Additional photo packages are also available for purchase and print instantly at the store. Book your appointment now! Reservations are available to book 7 days in advance.', 'https://i0.wp.com/www.columbusonthecheap.com/lotc-cms/wp-content/uploads/2022/11/2022_SantasArrival-scaled.jpg?resize=768%2C720&ssl=1', '2022-11-5 17:00:00', '2022-12-24 17:00:00', 'Columbus', 'Ohio', 43240, '1650 Gemini Place', 2);
+('Santa’s Wonderland and Santa Pictures at Cabela’s and Bass Pro Shops', 'Families will get a free 4×6 studio-quality photo. Additional photo packages are also available for purchase and print instantly at the store. Book your appointment now! Reservations are available to book 7 days in advance.', 'https://i0.wp.com/www.columbusonthecheap.com/lotc-cms/wp-content/uploads/2022/11/2022_SantasArrival-scaled.jpg?resize=768%2C720&ssl=1', '2022-11-5 17:00:00', '2022-12-24 17:00:00', 'Columbus', 'Ohio', 43240, '1650 Gemini Place', 2),
+('Columbus Free Clinic', 'We are a student-run organization, providing educational opportunities for professional and undergraduate volunteers and quality, culturally competent healthcare to our community.', 'https://columbusfreeclinic.com/wp-content/uploads/2022/08/CFC-Logo-Primary.png', '2023-01-05 17:45:00', '2023-01-05 22:00:00', 'Columbus', 'Ohio', 43201, '2231 North High Street', 2),
+('New Life Health and Wellness Center - Free Clinic', 'The Health and Wellness Center is open to anyone who needs to see a physician. They offer free basic medical services, including blood pressure monitoring, and other common illnesses. There is a team of volunteer physicians, nurses, pharmacists and prayer partners on duty when the Health & Wellness Center is open. No appointment is necessary.', 'https://www.freeclinics.com/gallery/25455_kvvzudkf.jpg', '2022-12-18 07:00:00', '2022-12-18 08:30:00', 'Columbus', 'Ohio', 43201, '25 W. 5th Ave.', 1),
+('Columbus Career Fair', 'Join us for this exciting career fair! Meet face to face with recruiters and HR managers from local and Fortune 500 companies to learn about open career opportunities. Dress to impress and please bring an updated resume. 100% free event for job seekers to attend.', 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F298456009%2F183327965130%2F1%2Foriginal.20220607-091118?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C31%2C992%2C496&s=29942dd1e228a7341b4ec6d96ad02ba4', '2023-01-18 09:30:00', '2023-01-18 12:30:00', 'Columbus', 'Ohio', 43215, '50 S. Front Street', 1),
+('Columbus Museum of Art', 'Columbus Museum of Art’s mission is to create great experiences with great art for everyone. Whether we are presenting an exhibition, designing an art-making activity, or giving visitors directions, we are guided by a vision to connect people and art. CMA nurtures that connection and removes barriers between our community and our collection. There’s a willingness at CMA to try new things. We encourage curiosity about art, conversations about creativity, and connections with cultures. A community hub where ideas can be exchanged and different voices heard, the Museum nurtures creativity through building relationships with diverse partners and designing engaging experiences. Free admission on Sundays!', 'https://www.columbusmuseum.org/wp-content/uploads/2019/11/aa.jpg', '2022-12-18 10:00:00', '2022-12-18 17:00:00', 'Columbus', 'Ohio', 43215, '480 East Broad St', 2);
 
 GO
 
@@ -78,7 +82,6 @@ CREATE TABLE event_tags (
 
 INSERT INTO event_tags (event_id, tag_name) 
 VALUES (1000, 'fitness'),
-(1000, 'health'),
 (1001, 'food'),
 (1001, 'free'),
 (1002, 'housing'),
@@ -91,6 +94,13 @@ VALUES (1000, 'fitness'),
 (1006, 'fitness'),
 (1007, 'entertainment'),
 (1007, 'kids'),
-(1007, 'holiday');
+(1007, 'holiday'),
+(1008, 'healthcare'),
+(1008, 'free'),
+(1009, 'free'),
+(1009, 'healthcare'),
+(1010, 'career services'),
+(1010, 'free'),
+(1011, 'entertainment');
 
 GO
