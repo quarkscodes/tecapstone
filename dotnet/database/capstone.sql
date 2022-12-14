@@ -58,16 +58,7 @@ CREATE TABLE [events] (
 )
 
 INSERT INTO events (name, description, img_url, start_time, end_time, city, state, zip, address, user_id)
-VALUES ();
-
-INSERT INTO events (name, description, img_url, start_time, end_time, city, state, zip, address, user_id)
-VALUES ();
-
-INSERT INTO events (name, description, img_url, start_time, end_time, city, state, zip, address, user_id)
-VALUES ();
-
-INSERT INTO events (name, description, img_url, start_time, end_time, city, state, zip, address, user_id)
-VALUES ();
+VALUES ('YMCA Hilltop', 'It is the YMCA', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd2I-dWGDQLBV_e-UMxGOwPew_PTl7MQIKPw&usqp=CAU', '2022-01-01 12:00:00', '2024-01-01 12:00:00', 'Columbus', 'Ohio', 43204, '2879 Valleyview Dr', 1);
 
 GO
 
@@ -78,10 +69,6 @@ CREATE TABLE event_tags (
 	CONSTRAINT PK_event_tags PRIMARY KEY (tag_name, event_id)
 )
 
-INSERT INTO event_tags (event_id, tag_name) VALUES ();
-INSERT INTO event_tags (event_id, tag_name) VALUES ();
-INSERT INTO event_tags (event_id, tag_name) VALUES ();
-INSERT INTO event_tags (event_id, tag_name) VALUES ();
-INSERT INTO event_tags (event_id, tag_name) VALUES ();
+INSERT INTO event_tags (event_id, tag_name) VALUES (1000, 'fitness');
 
 GO

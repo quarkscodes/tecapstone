@@ -23,7 +23,6 @@ namespace Capstone.Controllers
             userDao = _userDao;
         }
 
-        //todo reroute
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Ready()
