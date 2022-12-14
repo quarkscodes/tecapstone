@@ -23,7 +23,6 @@ namespace Capstone.Controllers
             userDao = _userDao;
         }
 
-        //todo reroute
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Ready()
@@ -47,6 +46,7 @@ namespace Capstone.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Authenticate(LoginUser userParam)
         {
             // Default to bad username/password message
