@@ -63,9 +63,12 @@ export default {
       selectedTagName: "",
       addedTag: {
         tag: "",
-        eventId: "",
-
+        eventId: ""
       },
+      deletedTag: {
+        tag: "",
+        eventId: ""
+      }
     };
   },
   methods: {
@@ -89,11 +92,14 @@ export default {
           console.log(error.response.data.status);
         });
     },
-    deleteTag(tag) {
-      EventTagsService.deleteEventTags(tag)
-        .then((response) => {
-          this.$store.commit(("SET_EVENT_TAGS", response.data));
-        })
+    deleteTag(dTag) {
+      this.deletedTag.tag = dTag.tag;
+      this.deletedTag.eventId = dTag.eventId;
+      console.log(this.deletedTag)
+      EventTagsService.deleteEventTags(this.deletedTag)
+        // .then((response) => {
+        //   this.$store.commit(("SET_EVENT_TAGS", response.data));
+        // })
         .catch((error) => {
           console.log(error.response.data.status);
         });

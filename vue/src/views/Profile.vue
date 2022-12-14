@@ -98,11 +98,11 @@ export default {
     return {
       user: {
         username: "",
-        organization:"",
-        location:"",
-        name:"",
-        phone:"",
-        email:"",
+        organization: "",
+        location: "",
+        name: "",
+        phone: "",
+        email: "",
         password: "",
         confirmPassword: "",
         role: "admin",
@@ -111,9 +111,11 @@ export default {
       updateErrorMsg: "There were problems updating this user.",
     };
   },
-    created() {
-        let name = this.$store.state.user.username
-            this.user = authService.get(name)
+  created() {
+    let name = this.$store.state.user.username;
+    authService.get(name).then((response) => {
+      this.user = response.data;
+    });
   },
   methods: {
     update() {

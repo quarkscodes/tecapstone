@@ -40,14 +40,12 @@ namespace Capstone.Controllers
         }
 
         [HttpGet("/get")]
-        [AllowAnonymous]
         public User GetUser(string username)
         {
             return userDao.GetUser(username);
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public IActionResult Authenticate(LoginUser userParam)
         {
             // Default to bad username/password message
@@ -73,7 +71,6 @@ namespace Capstone.Controllers
         }
 
         [HttpPost("/register")]
-        [AllowAnonymous]
         public IActionResult Register(RegisterUser userParam)
         {
             IActionResult result;
