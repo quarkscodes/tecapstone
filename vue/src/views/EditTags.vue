@@ -1,54 +1,65 @@
 <template>
-  <div>
-    <form>
-      <label for="">choose event</label>
-      <select name="" id="" v-model="selectedEvent">
-        <option
-          v-for="(event, index) in filteredEvents"
-          :key="index"
-          :value="event"
-        >
-          {{ event.name }}
-        </option>
-      </select>
-    </form>
-    <div
-      v-for="(event_tag, index) in this.$store.state.eventTags"
-      :key="index"
-      id="display_tags"
-    >
-      <p
-        class="event"
-        id="event_tag"
-        v-if="event_tag.eventId == selectedEvent.eventId"
-      >
-        {{ event_tag.tag }}
-      </p>
-      <button @click="deleteTag(event_tag)" v-if="event_tag.eventId == selectedEvent.eventId">
-        Delete Tag
-      </button>
+  <div class="edit_tags">
+    <div id="tags_head">
+      <p id="tags_head">Event Tags</p>
     </div>
-    <div id="add_event_list">
-      <form action="">
-        <label for="">choose tag</label>
-        <select name="" id="" v-model="selectedTagName">
+    <div id="tags_edit">
+      <form>
+        <label for="">Choose an event: </label>
+        <select name="" id="" v-model="selectedEvent">
           <option
-            v-for="(tag, index) in filteredTagsAvailable"
+            v-for="(event, index) in filteredEvents"
             :key="index"
-            :value="tag"
+            :value="event"
           >
-            {{ tag }}
+            {{ event.name }}
           </option>
         </select>
       </form>
     </div>
-    <div id="add_event_manual">
-      <form action="">
-        <label for=""></label>
-        <input type="text" v-model="selectedTagName" />
-      </form>
+    <div id="tags_edit">
+      <p>Tags associated:</p>
+      <ul>
+        <div
+          v-for="(event_tag, index) in this.$store.state.eventTags"
+          :key="index"
+          id="display_tags"
+        >
+          <li
+            class="event"
+            id="event_tag"
+            v-if="event_tag.eventId == selectedEvent.eventId"
+          >
+            {{ event_tag.tag }}
+          </li>
+        </div>
+      </ul>
     </div>
-    <button @click="addTag()">Add Tag</button>
+    <div id="tags_edit">
+      <div id="add_event_list">
+        <form action="">
+          <label for="">Choose an existing tag: </label>
+          <select name="" id="" v-model="selectedTagName">
+            <option
+              v-for="(tag, index) in filteredTagsAvailable"
+              :key="index"
+              :value="tag"
+            >
+              {{ tag }}
+            </option>
+          </select>
+        </form>
+      </div>
+      <div id="add_event_manual">
+        <form action="">
+          <label for="">Or create your own: </label>
+          <input type="text" v-model="selectedTagName" />
+        </form>
+      </div>
+    </div>
+    <div id="submit_tag">
+      <button id="submit_tag_button" type="submit" @click="addTag()">Add Tag</button>
+    </div>
   </div>
 </template>
 
@@ -63,12 +74,8 @@ export default {
       selectedTagName: "",
       addedTag: {
         tag: "",
-        eventId: ""
+        eventId: "",
       },
-      deletedTag: {
-        tag: "",
-        eventId: ""
-      }
     };
   },
   methods: {
@@ -87,23 +94,14 @@ export default {
       EventTagsService.createEventTags(this.addedTag)
         .then((response) => {
           this.$store.commit(("SET_EVENT_TAGS", response.data));
+         alert("Success: added tag to event");
+         this.$router.go()
         })
         .catch((error) => {
           console.log(error.response.data.status);
+          alert("Unable to add tag, try again");
         });
     },
-    deleteTag(dTag) {
-      this.deletedTag.tag = dTag.tag;
-      this.deletedTag.eventId = dTag.eventId;
-      console.log(this.deletedTag)
-      EventTagsService.deleteEventTags(this.deletedTag)
-        // .then((response) => {
-        //   this.$store.commit(("SET_EVENT_TAGS", response.data));
-        // })
-        .catch((error) => {
-          console.log(error.response.data.status);
-        });
-    }
   },
   computed: {
     filteredEvents() {
@@ -123,14 +121,12 @@ export default {
       let selectedTags = TagsList.filter((t) => {
         return t.eventId == this.selectedEvent.eventId;
       });
-      console.log("here" + selectedTags);
       //turn list from objects to strings
       selectedTags.forEach((t) => {
         if (!selectedTagsNames.includes(t.tag)) {
           selectedTagsNames.push(t.tag);
         }
       });
-      console.log("here " + selectedTagsNames);
       //all possible tags as strings
       let TagsListNames = [];
       TagsList.forEach((t) => {
@@ -151,4 +147,53 @@ export default {
 </script>
 
 <style>
+.edit_tags {
+  display: flexbox;
+  justify-content: center;
+  background-color: #7ebdc2;
+  padding: 5%;
+  margin: 32px 15%;
+}
+div#tags_head {
+  background: #efe6dd;
+  border: 2px solid black;
+  padding: 2px;
+  margin: 4px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+p#tags_head {
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+}
+#tags_edit {
+  display: flexbox;
+  background: #efe6dd;
+  padding: 12px;
+  margin: 4px;
+  border-radius: 4px;
+}
+#tags_edit input {
+  width: 98%;
+}
+#tags_edit li {
+  font-size: medium;
+  padding: 0px;
+}
+#submit_tag {
+  text-align: center;
+}
+#submit_tag_button {
+  width: 60%;
+  font-size: larger;
+}
+.edit_tags button{
+  margin: 8px;
+  margin-bottom: 0px;
+  padding: 4px;
+}
+#add_event_list{
+  padding-bottom: 8px;
+}
 </style>

@@ -86,11 +86,25 @@ export default {
 
 <style>
 /*universal styling*/
-body { background-color: #EFE6DD }
+body {
+  background-color: #EFE6DD;
+}
 * { font-family: Verdana, Helvetica, sans-serif }
 a {
   text-decoration: none;
   color: #000000;
+}
+::-webkit-scrollbar {
+  width: 24px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFAFA;
+    border-radius: 10px;
+
+}
+::-webkit-scrollbar-thumb {
+  background: #7EBDC2;
+  border-radius: 10px;
 }
 /*button styling: text*/
 button{
