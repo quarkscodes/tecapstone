@@ -170,6 +170,7 @@ export default {
   width: 100%;
   justify-content: center;
 }
+
 .form-register {
   display: flexbox;
   justify-content: center;
@@ -177,6 +178,7 @@ export default {
   padding: 5%;
   margin: 0px 15%;
   border: 3px solid #275053;
+  margin-top: 16px;
 }
 #register_head {
   background: #fcbb70;

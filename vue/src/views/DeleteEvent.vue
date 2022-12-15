@@ -38,6 +38,7 @@ export default {
   margin: 0px 4%;
     border: 3px solid #275053;
     background-color: #7ebdc2;
+      margin-top: 16px;
 
 }
 div#delete_head {
