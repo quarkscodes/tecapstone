@@ -141,10 +141,11 @@ export default {
   background: #7ebdc2;
   padding: 5%;
   margin: 0px 15%;
-    border: 3px solid #275053;
+  border: 3px solid #275053;
+  margin-top: 16px;
 }
 div#update_head {
-  background: #FCBB70;
+  background: #fcbb70;
   border: 2px solid #231f20;
   margin: 4px;
   margin-bottom: 12px;
@@ -188,7 +189,7 @@ d {
   width: 60%;
   font-size: larger;
 }
-#choose-event{
+#choose-event {
   max-width: 100%;
 }
 </style>

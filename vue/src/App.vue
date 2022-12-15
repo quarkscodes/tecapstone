@@ -4,6 +4,9 @@
       <div id="logo">
         <img src="../images/forward_logo.png" alt="" />
       </div>
+      <h1 id="front_title">
+        Helping Move You ForWARD
+      </h1>
       <div id="nav">
         <!--home button-->
         <router-link :to="{ name: 'home' }">
@@ -58,7 +61,7 @@
       <!--signed-in user greeting-->
       <div id="signed_in_user">
         <a v-if="$store.state.user.username">
-          <br/>Welcome, {{ $store.state.user.username }}
+          <br />Welcome, {{ $store.state.user.username }}
         </a>
       </div>
     </div>
@@ -119,27 +122,39 @@ a {
   border-radius: 10px;
 }
 /*header*/
-#main_header{
+#main_header {
   display: grid;
   grid-template-columns: 160px auto;
   grid-template-areas:
-  "logo buttons"
-  "logo signedin";
+    "logo front signedin"
+    "logo buttons signedin";
+  background-color: #7ebdc2;
+  border: 4px solid #275053;
+  border-radius: 12px;
 }
-#logo{
+#logo {
   grid-area: logo;
 }
-#logo img{
+#front_title {
+  grid-area: front;
+  width: fit-content;
+  padding: 8px;
+  border-radius: 8px;
+  color: #fffafa;
+  text-shadow: 2px 2px #275053;
+  background-color: FCBB70;
+}
+#logo img {
   margin: 18px;
   height: 120px;
   aspect-ratio: 1/1;
 }
-#nav{
+#nav {
   grid-area: buttons;
   display: flex;
-  align-items: end;
+  align-items: start;
 }
-#signed_in_user{
+#signed_in_user {
   grid-area: signedin;
   font-size: large;
 }

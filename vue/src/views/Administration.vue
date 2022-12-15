@@ -37,6 +37,7 @@ export default {
   padding: 5%;
   margin: 0px 15%;
   border: 3px solid #275053;
+  margin-top: 16px;
 }
 #option {
   width: 100%;
