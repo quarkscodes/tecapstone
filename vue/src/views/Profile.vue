@@ -119,6 +119,7 @@ export default {
   },
   methods: {
     update() {
+      console.log(this.user);
       if (this.user.password != this.user.confirmPassword) {
         this.updateErrors = true;
         this.updateErrorMsg = "Password & Confirm Password do not match.";
@@ -126,7 +127,8 @@ export default {
         authService
           .update(this.user)
           .then((response) => {
-            if (response.status == 201) {
+            if (response.status == 200) {
+              this.$store.commit("LOGOUT");
               this.$router.push({
                 path: "/login",
                 query: { update: "success" },

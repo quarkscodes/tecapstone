@@ -11,16 +11,15 @@ namespace Capstone.DAO
     {
         private readonly string connectionString;
 
-        private readonly string sqlGetUser = "SELECT user_id, username, password_hash, salt, user_role FROM users " +
+        private readonly string sqlGetUser = "SELECT * FROM users " +
             "WHERE username = @username;";
 
-        private readonly string sqlGetUsers = "SELECT user_id, username, password_hash, salt, user_role FROM users; ";
+        private readonly string sqlGetUsers = "SELECT * FROM users; ";
 
         private readonly string sqlAddUser = "INSERT INTO users (username, password_hash, salt, user_role, organization, location, name, phone, email) " +
             "VALUES(@username, @password_hash, @salt, @user_role, @organization, @location, @name, @phone, @email)";
 
-        private readonly string sqlUpdateUser =
-            "UPDATE users SET organization = @organization, name = @name, location = @location, phone = @phone, email = @email WHERE username = @username;";
+        private readonly string sqlUpdateUser = "UPDATE users SET username = @username, password_hash = @password_hash, salt = @salt, user_role = @user_role, organization = @organization, name = @name, location = @location, phone = @phone, email = @email WHERE user_id = @user_id;";
 
 
         public UserSqlDao(string dbConnectionString)
@@ -90,18 +89,25 @@ namespace Capstone.DAO
             return GetUser(user.Username);
         }
 
-        public bool UpdateUser(User user)
+        public bool UpdateUser(RegisterUser user)
         {
+            IPasswordHasher passwordHasher = new PasswordHasher();
+            PasswordHash hash = passwordHasher.ComputeHash(user.Password);
+
             using SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
 
             SqlCommand cmd = new SqlCommand(sqlUpdateUser, conn);
+            cmd.Parameters.AddWithValue("@username", user.Username);
+            cmd.Parameters.AddWithValue("@password_hash", hash.Password);
+            cmd.Parameters.AddWithValue("@salt", hash.Salt);
+            cmd.Parameters.AddWithValue("@user_role", user.Role);
             cmd.Parameters.AddWithValue("@organization", user.Organization);
             cmd.Parameters.AddWithValue("@location", user.Location);
             cmd.Parameters.AddWithValue("@name", user.Name);
             cmd.Parameters.AddWithValue("@phone", user.Phone);
             cmd.Parameters.AddWithValue("@email", user.Email);
-            cmd.Parameters.AddWithValue("@username", user.Username);
+            cmd.Parameters.AddWithValue("@user_id", user.UserId);
             return cmd.ExecuteNonQuery() > 0;
         }
 
@@ -114,6 +120,11 @@ namespace Capstone.DAO
                 PasswordHash = Convert.ToString(reader["password_hash"]),
                 Salt = Convert.ToString(reader["salt"]),
                 Role = Convert.ToString(reader["user_role"]),
+                Organization = Convert.ToString(reader["organization"]),
+                Location = Convert.ToString(reader["location"]),
+                Name = Convert.ToString(reader["name"]),
+                Phone = Convert.ToString(reader["phone"]),
+                Email = Convert.ToString(reader["email"]),
             };
 
             return u;

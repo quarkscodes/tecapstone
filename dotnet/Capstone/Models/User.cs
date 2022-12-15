@@ -22,6 +22,11 @@
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Role { get; set; }
+        public string Organization { get; set; }
+        public string Location { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
     }
 
     /// <summary>
@@ -47,6 +52,7 @@
     /// </summary>
     public class RegisterUser
     {
+        public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
