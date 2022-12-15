@@ -103,9 +103,11 @@ export default {
   align-items: center;
   background: #7ebdc2;
   padding: 5%;
-  margin: 32px 15%;
+  margin: 0px 15%;
+    border: 3px solid #275053;
+
 }
-div #create {
+div#create {
   display: flexbox;
   background: #efe6dd;
   padding: 6px;
@@ -113,9 +115,8 @@ div #create {
   border-radius: 4px;
 }
 div #create_head {
-  background: #efe6dd;
-  border: 2px solid black;
-  padding: 2px;
+  background: #fcbb70;
+  border: 2px solid #231f20;
   margin: 4px;
   margin-bottom: 12px;
   border-radius: 4px;

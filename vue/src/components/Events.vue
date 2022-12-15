@@ -9,59 +9,67 @@
       <!--event cards-->
       <div class="event_card">
         <p class="event" id="event_title">{{ event.name }}</p>
-        <img class="event" id="event_image" :src="event.imgUrl" alt="loading..." />
+        <img
+          class="event"
+          id="event_image"
+          :src="event.imgUrl"
+          alt="loading..."
+        />
         <p class="event" id="event_dates">
           <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
           <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
         </p>
         <div id="event_tag_list">
           <div v-for="(event_tag, index) in eventTagsList" :key="index">
-            <p
+            <li
               class="event"
               id="event_tag"
               v-if="event_tag.eventId == event.eventId"
             >
               {{ event_tag.tag }}
-            </p>
+            </li>
           </div>
         </div>
       </div>
     </router-link>
 
     <div v-if="deleting" class="popup">
-      <p><br/>Are you sure you want to delete this event?</p>
+      <p><br />Are you sure you want to delete this event?</p>
       <button v-on:click="deleteEvent(eventId)" class="popupInfo">Yes</button>
       <button v-on:click="notSure" class="popupInfo">Cancel</button>
     </div>
-
-    <div v-for="event in yourEvents" :key="event.eventId">
-      <router-link :to="{ name: 'details', params: { id: event.eventId } }">
-        <div class="event_card">
-          <p class="event" id="event_title">{{ event.name }}</p>
-          <img
-            class="event"
-            id="event_image"
-            :src="event.imgUrl"
-            alt="loading..."
-          />
-          <p class="event" id="event_dates">
-            <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
-            <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
-          </p>
-          <div id="event_tag_list">
-            <div v-for="(event_tag, index) in eventTagsList" :key="index">
-              <p
-                class="event"
-                id="event_tag"
-                v-if="event_tag.eventId == event.eventId"
-              >
-                {{ event_tag.tag }}
-              </p>
+    <div id="delete_card">
+      <div v-for="event in yourEvents" :key="event.eventId">
+        <router-link :to="{ name: 'details', params: { id: event.eventId } }">
+          <div class="event_card">
+            <p class="event" id="event_title">{{ event.name }}</p>
+            <img
+              class="event"
+              id="event_image"
+              :src="event.imgUrl"
+              alt="loading..."
+            />
+            <p class="event" id="event_dates">
+              <b>Start Date:</b> {{ DateOnly(event.startTime) }} <br />
+              <b>End Date:&nbsp;&nbsp;</b> {{ DateOnly(event.endTime) }}
+            </p>
+            <div id="event_tag_list">
+              <div v-for="(event_tag, index) in eventTagsList" :key="index">
+                <li
+                  class="event"
+                  id="event_tag"
+                  v-if="event_tag.eventId == event.eventId"
+                >
+                  {{ event_tag.tag }}
+                </li>
+              </div>
             </div>
           </div>
+        </router-link>
+        <div id="delete_button">
+          <button @click="areYouSure(event.eventId)">Delete Event</button>
         </div>
-      </router-link>
-      <button id="delete_button" @click="areYouSure(event.eventId)">Delete Event</button>
+      </div>
     </div>
   </div>
 </template>
@@ -113,7 +121,7 @@ export default {
 <style>
 .event_card {
   display: grid;
-  grid-template-columns: 3fr 7fr 4fr;
+  grid-template-columns: 3fr 7fr 2.7fr;
   grid-column-gap: 16px;
   grid-template-areas:
     "img title dates"
@@ -122,12 +130,19 @@ export default {
   margin: 8px;
   padding: 8px;
   border-radius: 12px;
+  border: 3px solid #275053;
+}
+
+#delete_card {
+  padding: 8px;
+  background-color: #efe6dd;
+  border-radius: 4px;
 }
 
 .event {
   width: fit-content;
   height: fit-content;
-  margin: auto;
+  margin-bottom: 4px;
 }
 
 #event_title {
@@ -138,22 +153,26 @@ export default {
   padding: 12px;
   border-radius: 8px;
   margin-top: 4px;
+  width: auto;
 }
 
 #event_image {
   grid-area: img;
   width: 95%;
   aspect-ratio: 1/1;
+  object-fit: contain;
   border-radius: 12px;
   background-color: #efe6dd;
+  margin: auto;
 }
 
 #event_dates {
   grid-area: dates;
   font-size: large;
   background-color: #efe6dd;
-  padding: 8px;
+  padding: 12px;
   border-radius: 12px;
+  margin-top: 4px;
 }
 
 #event_tag_list {
@@ -165,14 +184,14 @@ export default {
 #event_tag {
   font-size: large;
   text-align: left;
-  background-color: #efe6dd;
+  background-color: #fdd8b4;
   padding: 4px;
   padding-left: 8px;
   padding-right: 8px;
   border-radius: 6px;
-  margin: 4px 4px;
-  margin-bottom: 0px;
-
+  border-top-left-radius: 25px 10px;
+  border-bottom-left-radius: 25px 10px;
+  margin: 4px;
 }
 .popup {
   position: fixed;
@@ -182,20 +201,26 @@ export default {
   width: 40%;
   text-align: center;
   background-color: #fffafa;
-  border: 2px solid black;
+  border: 2px solid #231f20;
 }
-.popup p{
+.popup p {
   font-size: x-large;
   padding: 12px;
 }
-.popup button{
+.popup button {
   padding: 4px;
   margin: 8px;
   font-size: larger;
   width: 30%;
 }
-#delete_button{
+#delete_button {
   width: 100%;
+  text-align: center;
+  margin: 16px 0px;
+  margin-bottom: 32px;
+}
+#delete_button button {
   font-size: larger;
+  width: 50%;
 }
 </style>

@@ -108,7 +108,7 @@ a {
 }
 /*scroll bar*/
 ::-webkit-scrollbar {
-  width: 24px;
+  width: 18px;
 }
 ::-webkit-scrollbar-track {
   background: #fffafa;
@@ -139,10 +139,9 @@ a {
   display: flex;
   align-items: end;
 }
-#nav button{
-}
 #signed_in_user{
   grid-area: signedin;
+  font-size: large;
 }
 /*button styling: text*/
 button {

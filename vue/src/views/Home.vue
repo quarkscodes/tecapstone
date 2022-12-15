@@ -168,6 +168,12 @@ export default {
   margin: 8px;
   padding: 8px;
   border-radius: 12px;
+  height: 95vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1.3vh;
+    border: 3px solid #275053;
+
 }
 #home_events {
   grid-area: events;
@@ -184,6 +190,7 @@ export default {
   font-size: x-large;
   width: 90%;
   margin-bottom: 8px;
+  
 }
 #filter_tag_options{
   font-size: small;
@@ -206,7 +213,7 @@ export default {
   margin-top: 8px;
   width: auto;
   height: 350px;
-  border: 2px solid black;
+  border: 2px solid #231f20;
 }
 #bx {
   grid-area: bx;

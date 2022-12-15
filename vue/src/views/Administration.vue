@@ -1,25 +1,25 @@
 <template>
   <div class="admin">
-      <button id="option_straight">Profile</button>
-      <router-link :to="{ name: 'profile' }">
-        <button id="option">Edit Profile</button>
-      </router-link>
-      <router-link :to="{ name: 'register' }">
-        <button id="option">Create New User</button>
-      </router-link>
-      <button id="option_straight">Events</button>
-      <router-link :to="{ name: 'createEvent' }">
-        <button id="option">Create Event</button>
-      </router-link>
-      <router-link :to="{ name: 'updateEvent' }">
-        <button id="option">Edit Event</button>
-      </router-link>
-      <router-link :to="{ name: 'deleteEvent' }">
-        <button id="option">Delete Event</button>
-      </router-link>
-      <router-link :to="{ name: 'editTags' }">
-        <button id="option">Edit Event Tags</button>
-      </router-link>
+    <button id="option_straight">Profile</button>
+    <router-link :to="{ name: 'profile' }">
+      <button id="option">Edit Profile</button>
+    </router-link>
+    <router-link :to="{ name: 'register' }">
+      <button id="option">Create New User</button>
+    </router-link>
+    <button id="option_straight">Events</button>
+    <router-link :to="{ name: 'createEvent' }">
+      <button id="option">Create Event</button>
+    </router-link>
+    <router-link :to="{ name: 'updateEvent' }">
+      <button id="option">Edit Event</button>
+    </router-link>
+    <router-link :to="{ name: 'deleteEvent' }">
+      <button id="option">Delete Event</button>
+    </router-link>
+    <router-link :to="{ name: 'editTags' }">
+      <button id="option">Edit Event Tags</button>
+    </router-link>
   </div>
 </template>
 
@@ -35,7 +35,8 @@ export default {
   justify-content: center;
   background: #7ebdc2;
   padding: 5%;
-  margin: 32px 15%;
+  margin: 0px 15%;
+  border: 3px solid #275053;
 }
 #option {
   width: 100%;

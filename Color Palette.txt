@@ -1,6 +1,7 @@
 Snow-White: FFFAFA
 Off-White: EFE6DD
-Blue: 7EBDC2
-Red: BB4430
-Black: 231F20
+Manilla: FDD8B4
 Orange: FCBB70
+Blue: 7EBDC2
+Slate: 275053
+Black: 231F20

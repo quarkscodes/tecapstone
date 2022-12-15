@@ -6,7 +6,7 @@
     <div id="tags_edit">
       <form>
         <label for="">Choose an event: </label>
-        <select name="" id="" v-model="selectedEvent">
+        <select name="" id="tag_event_select" v-model="selectedEvent">
           <option
             v-for="(event, index) in filteredEvents"
             :key="index"
@@ -58,7 +58,9 @@
       </div>
     </div>
     <div id="submit_tag">
-      <button id="submit_tag_button" type="submit" @click="addTag()">Add Tag</button>
+      <button id="submit_tag_button" type="submit" @click="addTag()">
+        Add Tag
+      </button>
     </div>
   </div>
 </template>
@@ -94,8 +96,8 @@ export default {
       EventTagsService.createEventTags(this.addedTag)
         .then((response) => {
           this.$store.commit(("SET_EVENT_TAGS", response.data));
-         alert("Success: added tag to event");
-         this.$router.go()
+          alert("Success: added tag to event");
+          this.$router.go();
         })
         .catch((error) => {
           console.log(error.response.data.status);
@@ -152,12 +154,12 @@ export default {
   justify-content: center;
   background-color: #7ebdc2;
   padding: 5%;
-  margin: 32px 15%;
+  margin: 0px 15%;
+  border: 3px solid #275053;
 }
 div#tags_head {
-  background: #efe6dd;
-  border: 2px solid black;
-  padding: 2px;
+  background: #fcbb70;
+  border: 2px solid #231f20;
   margin: 4px;
   margin-bottom: 12px;
   border-radius: 4px;
@@ -174,6 +176,9 @@ p#tags_head {
   margin: 4px;
   border-radius: 4px;
 }
+#tag_event_select {
+  max-width: 100%;
+}
 #tags_edit input {
   width: 98%;
 }
@@ -188,12 +193,12 @@ p#tags_head {
   width: 60%;
   font-size: larger;
 }
-.edit_tags button{
+.edit_tags button {
   margin: 8px;
   margin-bottom: 0px;
   padding: 4px;
 }
-#add_event_list{
+#add_event_list {
   padding-bottom: 8px;
 }
 </style>

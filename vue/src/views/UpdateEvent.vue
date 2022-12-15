@@ -6,7 +6,7 @@
       </div>
       <div id="update">
         <form class="choose-update" v-on:submit.prevent="setEvent(e)">
-          <label for="choose-event">Choose an event:&nbsp;</label>
+          <label for="choose-event">Choose an event:</label>
           <select name="choose-event" id="choose-event" v-model="updateEvent">
             <option
               id="choose-event-options"
@@ -39,12 +39,12 @@
       </div>
       <div id="update">
         <label for="start_time">Start Date and Time:<br /></label>
-        <d>(MM/DD/YYYY HH/MM/SS [A/P]M)</d><br />
+        <d>(MM/DD/YYYY HH:MM:SS [A/P]M)</d><br />
         <input id="start_time" v-model="updateEvent.startTime" />
       </div>
       <div id="update">
         <label for="end_time">End Date and Time:<br /></label>
-        <d>(MM/DD/YYYY HH/MM/SS [A/P]M)</d><br />
+        <d>(MM/DD/YYYY HH:MM:SS [A/P]M)</d><br />
         <input id="end_time" v-model="updateEvent.endTime" />
       </div>
       <div id="update">
@@ -140,12 +140,13 @@ export default {
   justify-content: center;
   background: #7ebdc2;
   padding: 5%;
-  margin: 32px 15%;
+  margin: 0px 15%;
+    border: 3px solid #275053;
+
 }
 div#update_head {
-  background: #efe6dd;
-  border: 2px solid black;
-  padding: 2px;
+  background: #FCBB70;
+  border: 2px solid #231f20;
   margin: 4px;
   margin-bottom: 12px;
   border-radius: 4px;
@@ -187,5 +188,8 @@ d {
 #submit_update_button {
   width: 60%;
   font-size: larger;
+}
+#choose-event{
+  max-width: 100%;
 }
 </style>

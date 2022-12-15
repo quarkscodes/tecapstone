@@ -13,9 +13,9 @@
     <p class="details" id="details_end"><b>End Date:</b> {{ event.endTime }}</p>
     <div id="details_tag_list">
       <div v-for="(event_tag, index) in eventTagsList" :key="index">
-        <p id="details_tag" v-if="event_tag.eventId == event.eventId">
+        <li id="details_tag" v-if="event_tag.eventId == event.eventId">
           {{ event_tag.tag }}
-        </p>
+        </li>
       </div>
     </div>
     <p class="details" id="details_location">
@@ -78,6 +78,7 @@ export default {
   margin: 16px;
   padding: 24px;
   border-radius: 12px;
+  border: 3px solid #275053;
 }
 
 #details_title {
@@ -86,9 +87,10 @@ export default {
   text-align: center;
   font-size: xx-large;
   font-weight: bold;
-  width: fit-content;
+  width: auto;
   padding: 8px;
-  margin: 16px auto;
+  margin: 16px 0px;
+  margin-top: 0px;
   border-radius: 8px;
 }
 
@@ -97,6 +99,8 @@ export default {
   background-color: #efe6dd;
   width: 100%;
   aspect-ratio: 1/1;
+  object-fit: contain;
+  border-radius: 12px;
   border-radius: 12px;
 }
 
@@ -137,10 +141,12 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 6px;
+  border-top-left-radius: 25px 10px;
+  border-bottom-left-radius: 25px 10px;
   margin: auto;
   margin-left: 4px;
   margin-right: 4px;
-  background-color: #efe6dd;
+  background-color: #fdd8b4;
 }
 
 #details_location {

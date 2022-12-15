@@ -34,16 +34,17 @@ export default {
 .delete_event {
   display: flexbox;
   justify-content: center;
-  background-color: #7ebdc2;
   padding: 5%;
-  margin: 32px 15%;
+  margin: 0px 4%;
+    border: 3px solid #275053;
+    background-color: #7ebdc2;
+
 }
 div#delete_head {
-  background: #efe6dd;
-  border: 2px solid black;
-  padding: 2px;
+  background: #FCBB70;
+  border: 2px solid #231f20;
   margin: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   border-radius: 4px;
 }
 p#delete_head {
