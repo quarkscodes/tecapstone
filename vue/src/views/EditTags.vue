@@ -27,7 +27,7 @@
         >
           <li
             class="event"
-            id="event_tag"
+            id="edit_tag"
             v-if="event_tag.eventId == selectedEvent.eventId"
           >
             {{ event_tag.tag }}

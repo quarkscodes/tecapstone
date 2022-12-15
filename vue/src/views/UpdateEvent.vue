@@ -142,7 +142,6 @@ export default {
   padding: 5%;
   margin: 0px 15%;
     border: 3px solid #275053;
-
 }
 div#update_head {
   background: #FCBB70;

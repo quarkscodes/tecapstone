@@ -63,12 +63,12 @@
           v-model="user.email"
           required
         />
-        <label for="password" class="sr-only"><h3>Password</h3></label>
+        <label for="new_password" class="sr-only"><h3>New Password</h3></label>
         <input
-          type="password"
+          type="new_password"
           id="password"
           class="form-control"
-          placeholder="Password"
+          placeholder="New Password"
           v-model="user.password"
           required
         />
@@ -76,7 +76,7 @@
           type="password"
           id="confirmPassword"
           class="form-control"
-          placeholder="Confirm Password"
+          placeholder="Confirm New Password"
           v-model="user.confirmPassword"
           required
         />
